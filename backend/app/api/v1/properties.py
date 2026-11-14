@@ -244,6 +244,19 @@ def get_property(
             "recorded_owner_phone": prop.recorded_owner_phone,
             "is_fresh": property_summary(prop)["is_fresh"],
             "availability_stored": prop.availability_status,
+            # Private coordinates are returned only to the owner, assigned
+            # manager, creator and staff. Public responses use the
+            # approximate public point instead.
+            "private_latitude": (
+                float(prop.location.latitude_private)
+                if prop.location and prop.location.latitude_private is not None
+                else None
+            ),
+            "private_longitude": (
+                float(prop.location.longitude_private)
+                if prop.location and prop.location.longitude_private is not None
+                else None
+            ),
         }
     return {"property": detail, "similar": property_service.similar_properties(db, prop)}
 

@@ -189,3 +189,49 @@ def test_moderation_requires_permission_and_audits_action(
 
     actions = [row.action for row in db.query(AuditLog).all()]
     assert "property.approve" in actions
+
+
+def test_owner_private_pin_is_hidden_from_public_location(
+    client, user_factory, client_factory, locations
+):
+    landlord = user_factory(roles=["landlord"])
+    admin = user_factory(roles=["super_admin"])
+    landlord_client, landlord_headers = client_factory(landlord.phone)
+    admin_client, admin_headers = client_factory(admin.phone)
+
+    prop = create_property(
+        landlord_client,
+        landlord_headers,
+        locations,
+        title="Home with a device-pinned location",
+    )
+    pinned = landlord_client.patch(
+        f"/api/v1/properties/{prop['id']}",
+        json={
+            "location": {
+                "town_id": str(locations["town"].id),
+                "neighbourhood_id": str(locations["neighbourhood"].id),
+                "address_line": "Exact test lane",
+                "precision": "approximate",
+                "latitude": -1.246612,
+                "longitude": 34.618123,
+            }
+        },
+        headers=landlord_headers,
+    )
+    assert pinned.status_code == 200, pinned.text
+
+    own = landlord_client.get(f"/api/v1/properties/{prop['id']}")
+    assert own.status_code == 200
+    management = own.json()["property"]["management"]
+    assert abs(management["private_latitude"] - (-1.246612)) < 1e-6
+    assert abs(management["private_longitude"] - 34.618123) < 1e-6
+
+    approve_and_publish(admin_client, admin_headers, prop["id"])
+    public = client.get(f"/api/v1/properties/{prop['id']}")
+    assert public.status_code == 200
+    body = public.json()["property"]
+    assert "management" not in body
+    # The public point stays at the neighbourhood centre for approximate pins.
+    assert abs(body["location"]["latitude"] - (-1.2500)) < 1e-6
+    assert abs(body["location"]["longitude"] - 34.6210) < 1e-6
