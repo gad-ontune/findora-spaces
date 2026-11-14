@@ -53,6 +53,7 @@ from app.schemas.payloads import (
     VerificationRequestIn,
     VerificationReviewIn,
 )
+from app.services import subscription_service
 from app.services.audit import write_audit
 from app.services.location_service import point_wkt
 from app.services.notifications import create_notification
@@ -277,6 +278,7 @@ def detect_duplicates(db: Session, payload: PropertyCreateIn, user: User) -> lis
 def create_property(db: Session, payload: PropertyCreateIn, user: User) -> tuple[Property, list[dict]]:
     if not user.phone_verified_at:
         raise Forbidden("Verify your phone number before submitting a property.", code="phone_not_verified")
+    subscription_service.enforce_listing_limit(db, user)
     town = _resolve_town(db, uuid.UUID(payload.location.town_id))
     neighbourhood, landmark, locality = _validate_location_links(
         db,

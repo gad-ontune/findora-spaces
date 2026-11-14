@@ -25,12 +25,12 @@ from app.models import (
     Promotion,
     Refund,
     SearchRequest,
-    Subscription,
     SubscriptionPlan,
     User,
 )
 from app.models.base import PaymentStatus
 from app.schemas.payloads import PaymentInitiateIn
+from app.services import subscription_service
 from app.services.audit import write_audit
 from app.services.notifications import create_notification
 from app.services.property_service import can_manage_property, load_property
@@ -42,7 +42,9 @@ def _reference(prefix: str = "PAY") -> str:
     return f"{prefix}-{''.join(secrets.choice(alphabet) for _ in range(8))}"
 
 
-def _price_for(db: Session, payload: PaymentInitiateIn, user: User) -> tuple[Decimal, str, str | None]:
+def _price_for(
+    db: Session, payload: PaymentInitiateIn, user: User
+) -> tuple[Decimal, str, str | None, uuid.UUID | None]:
     if payload.purpose == "assisted_search":
         if not payload.related_id:
             raise ValidationError("Select the assisted search request you are paying for.")
@@ -60,7 +62,12 @@ def _price_for(db: Session, payload: PaymentInitiateIn, user: User) -> tuple[Dec
         ).scalar_one_or_none()
         if existing:
             raise Conflict("This assisted search service has already been paid for.")
-        return fee, f"Assisted property search service · {request.reference}", "search_request"
+        return (
+            fee,
+            f"Assisted property search service · {request.reference}",
+            "search_request",
+            request.id,
+        )
     if payload.purpose == "featured_listing":
         if not payload.related_id:
             raise ValidationError("Select a property to feature.")
@@ -68,7 +75,7 @@ def _price_for(db: Session, payload: PaymentInitiateIn, user: User) -> tuple[Dec
         if not can_manage_property(db, prop, user):
             raise Forbidden("You can only promote properties you manage.")
         fee = Decimal(str(get_setting(db, "service.featured_listing_fee", 200)))
-        return fee, f"Featured listing · {prop.reference}", "property"
+        return fee, f"Featured listing · {prop.reference}", "property", prop.id
     if payload.purpose == "subscription":
         if not payload.plan_code:
             raise ValidationError("Select a subscription plan.")
@@ -80,7 +87,16 @@ def _price_for(db: Session, payload: PaymentInitiateIn, user: User) -> tuple[Dec
         ).scalar_one_or_none()
         if plan is None:
             raise NotFound("Subscription plan not found.")
-        return plan.price, f"Subscription · {plan.name}", "subscription_plan"
+        if plan.price <= 0:
+            raise ValidationError(
+                "The free Starter plan is included by default and does not need a payment."
+            )
+        return (
+            plan.price,
+            f"Subscription · {plan.name}",
+            "subscription_plan",
+            plan.id,
+        )
     if payload.purpose == "inspection":
         if not payload.related_id:
             raise ValidationError("Select a property for the inspection service.")
@@ -88,7 +104,7 @@ def _price_for(db: Session, payload: PaymentInitiateIn, user: User) -> tuple[Dec
         if not can_manage_property(db, prop, user) and "super_admin" not in user.role_codes:
             raise Forbidden("You can only request inspections for properties you manage.")
         fee = Decimal(str(get_setting(db, "service.inspection_fee", 1000)))
-        return fee, f"Property inspection · {prop.reference}", "property"
+        return fee, f"Property inspection · {prop.reference}", "property", prop.id
     raise ValidationError("Unsupported payment purpose.")
 
 
@@ -100,13 +116,13 @@ def initiate_payment(db: Session, user: User, payload: PaymentInitiateIn) -> Pay
         if existing.user_id != user.id:
             raise Forbidden("This idempotency key belongs to another account.")
         return existing
-    amount, description, related_type = _price_for(db, payload, user)
+    amount, description, related_type, related_id = _price_for(db, payload, user)
     payment = Payment(
         reference=_reference(),
         user_id=user.id,
         purpose=payload.purpose,
         related_type=related_type,
-        related_id=uuid.UUID(payload.related_id) if payload.related_id else None,
+        related_id=related_id,
         amount=amount,
         currency="KES",
         status=PaymentStatus.INITIATED.value,
@@ -205,19 +221,19 @@ def _apply_entitlement(db: Session, payment: Payment) -> None:
                 )
             )
     elif payment.purpose == "subscription" and payment.related_id:
-        plan = db.get(SubscriptionPlan, payment.related_id)
-        if plan:
-            now = utcnow()
-            days = {"monthly": 30, "quarterly": 90, "annual": 365}.get(plan.period, 30)
-            db.add(
-                Subscription(
-                    user_id=payment.user_id,
-                    plan_id=plan.id,
-                    status="active",
-                    starts_at=now,
-                    ends_at=now + timedelta(days=days),
-                    payment_id=payment.id,
-                )
+        subscription = subscription_service.activate_from_payment(db, payment)
+        if subscription is not None:
+            write_audit(
+                db,
+                actor=None,
+                action="subscription.activated",
+                resource_type="subscription",
+                resource_id=subscription.id,
+                after={
+                    "plan_id": str(payment.related_id),
+                    "status": subscription.status,
+                    "ends_at": subscription.ends_at,
+                },
             )
 
 
@@ -362,6 +378,7 @@ def refund_payment(
     db.add(refund)
     if amount >= remaining:
         payment.status = PaymentStatus.REFUNDED.value
+        subscription_service.cancel_for_refund(db, payment)
     db.add(
         PaymentEvent(
             payment_id=payment.id,

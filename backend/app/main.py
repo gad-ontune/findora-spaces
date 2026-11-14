@@ -23,6 +23,7 @@ from app.api.v1 import (
     properties,
     public,
     seeker,
+    subscriptions,
     support,
     users,
     viewings,
@@ -203,7 +204,7 @@ for module in (auth, users, locations, properties, seeker, assisted, partners, v
     app.include_router(module.router, prefix=api)
 app.include_router(properties.enquiry_router, prefix=api)
 app.include_router(properties.verification_router, prefix=api)
-for module in (notifications, payments, public, support, admin):
+for module in (notifications, payments, public, subscriptions, support, admin):
     app.include_router(module.router, prefix=api)
 
 

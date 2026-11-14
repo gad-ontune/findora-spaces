@@ -46,6 +46,8 @@ from app.models import (  # noqa: E402
     Neighbourhood,
     Role,
     SubCounty,
+    Subscription,
+    SubscriptionPlan,
     Town,
     User,
     UserProfile,
@@ -219,6 +221,8 @@ def create_user(
     phone: str | None = None,
     verified: bool = True,
     password: str = TEST_PASSWORD,
+    plan_code: str | None = "partner_pro",
+    plan_days: int = 365,
 ) -> User:
     role_rows = db.execute(select(Role).where(Role.code.in_(roles))).scalars().all()
     found = {row.code for row in role_rows}
@@ -247,6 +251,24 @@ def create_user(
             data_processing_consent_at=datetime.now(UTC),
         )
     )
+    # Most tests create several listings with the same landlord. Give those
+    # accounts a high-limit plan by default; pass plan_code=None to exercise the
+    # free Starter limit instead.
+    if plan_code and set(roles) & {"landlord", "property_manager", "data_partner"}:
+        plan = db.execute(
+            select(SubscriptionPlan).where(SubscriptionPlan.code == plan_code)
+        ).scalar_one_or_none()
+        if plan is not None:
+            now = datetime.now(UTC)
+            db.add(
+                Subscription(
+                    user_id=user.id,
+                    plan_id=plan.id,
+                    status="active",
+                    starts_at=now,
+                    ends_at=now + timedelta(days=plan_days),
+                )
+            )
     db.commit()
     db.refresh(user)
     return user

@@ -8,6 +8,7 @@ from sqlalchemy.orm import Session
 from app.core.permissions import DEFAULT_PERMISSIONS, ROLE_DEFINITIONS
 from app.models import Permission, Role, SystemSetting
 from app.core.security import utcnow
+from app.services.subscription_service import ensure_default_plans
 
 
 def ensure_rbac(db: Session) -> None:
@@ -88,3 +89,5 @@ def get_setting(db: Session, key: str, default=None):
 def bootstrap(db: Session) -> None:
     ensure_rbac(db)
     ensure_settings(db)
+    ensure_default_plans(db)
+    db.commit()

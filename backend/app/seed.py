@@ -72,6 +72,7 @@ from app.models import (
     ShortlistMember,
     SharedShortlist,
     SubCounty,
+    Subscription,
     SubscriptionPlan,
     SupportTicket,
     SystemSetting,
@@ -98,6 +99,7 @@ from app.models.base import (
     ViewingStatus,
 )
 from app.services.location_service import point_wkt
+from app.services.subscription_service import PLAN_PERIOD_DAYS, ensure_default_plans
 
 DEMO_PASSWORD = {
     "admin@findora.co.ke": "Admin123!",
@@ -1827,30 +1829,18 @@ def _create_viewings(db: Session, users: dict[str, User], props: dict[str, Prope
 
 
 def _create_finance(db: Session, users: dict[str, User], props: dict[str, Property], assisted: dict) -> None:
-    plans = [
-        ("landlord_free", "Landlord Starter", "List up to two properties and manage enquiries.", 0, "monthly", ["2 active listings", "Enquiry inbox", "Availability reminders"], 2),
-        ("landlord_growth", "Landlord Growth", "For landlords and managers with a growing portfolio.", 1000, "monthly", ["10 active listings", "Priority support", "Performance overview"], 10),
-        ("partner_pro", "Partner Pro", "For independent property managers and agents.", 2500, "monthly", ["25 active listings", "Assisted search assignments", "Advanced analytics"], 25),
-    ]
-    for code, name, description, price, period, features, limit in plans:
-        db.add(
-            SubscriptionPlan(
-                code=code,
-                name=name,
-                description=description,
-                price=Decimal(str(price)),
-                currency="KES",
-                period=period,
-                features=json.dumps(features),
-                listing_limit=limit,
-                is_active=True,
-            )
-        )
+    ensure_default_plans(db)
+    plan_map = {
+        plan.code: plan for plan in db.execute(select(SubscriptionPlan)).scalars().all()
+    }
+    existing_promotions = set(db.execute(select(Promotion.code)).scalars().all())
     for code, name, description, price, days in [
         ("featured-14", "Featured listing · 14 days", "Show the listing in featured placements for 14 days.", 200, 14),
         ("featured-30", "Featured listing · 30 days", "Show the listing in featured placements for 30 days.", 350, 30),
         ("urgent-7", "Urgent availability · 7 days", "Highlight recently confirmed availability for seven days.", 150, 7),
     ]:
+        if code in existing_promotions:
+            continue
         db.add(
             Promotion(
                 code=code,
@@ -1862,6 +1852,66 @@ def _create_finance(db: Session, users: dict[str, User], props: dict[str, Proper
                 duration_days=days,
                 is_active=True,
                 terms="Promotions do not affect moderation or verification outcomes.",
+            )
+        )
+
+    # Demo accounts that already hold a portfolio larger than the free limit keep
+    # working out of the box. These are clearly labelled demo subscriptions and
+    # payments, not evidence of a real charge.
+    now = datetime.now(UTC)
+    for user_key, plan_code in (
+        ("landlord", "partner_pro"),
+        ("landlord2", "partner_pro"),
+        ("manager", "partner_pro"),
+    ):
+        user = users.get(user_key)
+        plan = plan_map.get(plan_code)
+        if user is None or plan is None:
+            continue
+        existing_subscription = db.execute(
+            select(Subscription).where(Subscription.user_id == user.id)
+        ).scalars().first()
+        if existing_subscription is not None:
+            continue
+        payment = Payment(
+            reference=f"PAY-SEED-{user_key.upper()}",
+            user_id=user.id,
+            purpose="subscription",
+            related_type="subscription_plan",
+            related_id=plan.id,
+            amount=plan.price,
+            currency=plan.currency,
+            status=PaymentStatus.SUCCESS.value,
+            provider="mpesa",
+            provider_reference=f"MOCK-SEED-{user_key.upper()}",
+            phone=user.phone,
+            idempotency_key=f"seed-subscription-{user_key}",
+            description=f"Demo subscription · {plan.name}",
+            completed_at=now,
+        )
+        db.add(payment)
+        db.flush()
+        subscription = Subscription(
+            user_id=user.id,
+            plan_id=plan.id,
+            status="active",
+            starts_at=now - timedelta(days=10),
+            ends_at=now + timedelta(days=PLAN_PERIOD_DAYS.get(plan.period, 30) - 10),
+            payment_id=payment.id,
+        )
+        db.add(subscription)
+        db.add(
+            Invoice(
+                number=f"INV-SEED-{user_key.upper()}",
+                payment_id=payment.id,
+                user_id=user.id,
+                amount=plan.price,
+                currency=plan.currency,
+                status="paid",
+                line_items=json.dumps(
+                    [{"description": payment.description, "amount": str(plan.price)}]
+                ),
+                paid_at=now,
             )
         )
     db.flush()
