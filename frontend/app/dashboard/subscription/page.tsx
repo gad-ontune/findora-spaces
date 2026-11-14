@@ -250,7 +250,7 @@ export default function SubscriptionPage() {
                     role="progressbar"
                     aria-valuemin={0}
                     aria-valuemax={limit}
-                    aria-valuenow={used}
+                    aria-valuenow={Math.min(used, limit)}
                     aria-label="Listing limit usage"
                   >
                     <div
