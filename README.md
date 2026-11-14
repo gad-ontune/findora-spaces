@@ -25,6 +25,14 @@ Landlords and managers can pin the exact property position with their phone inst
 
 The captured point is stored as the private property location. The public map stays approximate unless **Map precision** is deliberately set to **Exact**. Owners and authorised staff can see the private coordinates when editing the listing; public API responses never include them.
 
+## Subscriptions and listing limits
+
+Every account with listing access has a plan. The free **Landlord Starter** plan is applied automatically and allows two active listings. **Landlord Growth** raises the limit to ten and **Partner Pro** to twenty-five. Pending, approved and suspended listings count toward the limit; archived, rejected and deleted listings do not.
+
+Landlords and managers can review their current plan, usage and renewal date at `/dashboard/subscription`. A paid plan is activated only after the backend confirms payment. The same plan renews by extending the current period; a different plan replaces the current one. Cancelling keeps the plan active until the end of the period, after which the free plan applies automatically. A full refund of a subscription payment revokes the subscription tied to that payment.
+
+The listing API enforces the limit when a new property is submitted, returning `listing_limit_reached` with the plan and usage details. Staff accounts are exempt. In the demo environment M-Pesa remains simulated, so no real money is charged.
+
 ## Repository layout
 
 ```
