@@ -382,6 +382,40 @@ export type Invoice = {
   paid_at: string | null;
 };
 
+export type SubscriptionPlan = {
+  id: string;
+  code: string;
+  name: string;
+  description: string | null;
+  price: number;
+  currency: string;
+  period: string;
+  features: string[];
+  listing_limit: number | null;
+};
+
+export type SubscriptionSummary = {
+  id: string | null;
+  status: "free" | "active" | "cancelling" | "expired" | string;
+  plan: SubscriptionPlan | null;
+  starts_at: string | null;
+  ends_at: string | null;
+  days_remaining: number | null;
+  cancel_at_period_end: boolean;
+  listing_limit: number | null;
+  listings_used: number;
+  listings_remaining: number | null;
+  can_create_listing: boolean;
+  staff_exempt: boolean;
+  payment_id: string | null;
+  is_free: boolean;
+};
+
+export type SubscriptionPayload = {
+  subscription: SubscriptionSummary;
+  plans: SubscriptionPlan[];
+};
+
 export type SavedSearch = {
   id: string;
   name: string;

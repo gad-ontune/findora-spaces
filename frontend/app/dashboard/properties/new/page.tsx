@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useQuery } from "@tanstack/react-query";
 import { ShieldAlert } from "lucide-react";
 
 import { useAuth } from "@/components/providers";
@@ -8,9 +9,17 @@ import { PropertyForm } from "@/components/dashboard/property-form";
 import { InlineNote, Skeleton } from "@/components/ui/feedback";
 import { PageHeader } from "@/components/ui/page";
 import { LinkButton } from "@/components/ui/button";
+import { api } from "@/lib/api";
+import type { SubscriptionPayload } from "@/lib/types";
 
 export default function NewPropertyPage() {
   const { user, loading, hasPermission } = useAuth();
+  const subscriptionQuery = useQuery({
+    queryKey: ["subscription"],
+    queryFn: () => api.get<SubscriptionPayload>("/subscriptions/me"),
+    enabled: Boolean(user),
+  });
+  const subscription = subscriptionQuery.data?.subscription;
 
   if (loading || !user) {
     return (
@@ -66,6 +75,23 @@ export default function NewPropertyPage() {
                 Verify now
               </Link>
               .
+            </span>
+          </span>
+        </InlineNote>
+      ) : null}
+
+      {subscription && !subscription.can_create_listing ? (
+        <InlineNote tone="warning">
+          <span className="flex items-start gap-2">
+            <ShieldAlert className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
+            <span>
+              Your {subscription.plan?.name ?? "current"} plan allows{" "}
+              {subscription.listing_limit ?? "a limited number of"} active listings and you are
+              using {subscription.listings_used}.{" "}
+              <Link href="/dashboard/subscription" className="font-semibold underline">
+                Review your plan
+              </Link>{" "}
+              or archive a listing before adding another.
             </span>
           </span>
         </InlineNote>

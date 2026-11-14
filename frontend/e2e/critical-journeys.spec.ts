@@ -70,6 +70,18 @@ test.describe("property location pinning", () => {
   });
 });
 
+test.describe("subscription", () => {
+  test("a landlord can see their current plan and listing usage", async ({ page }) => {
+    await signIn(page, "+254700000002", "Landlord123!");
+
+    await page.goto("/dashboard/subscription");
+    await expect(page.getByRole("heading", { name: "Plan and listing limit" })).toBeVisible();
+    await expect(page.getByText("Listing usage")).toBeVisible();
+    await expect(page.getByText(/active listings used/)).toBeVisible();
+    await expect(page.getByText("Current plan").first()).toBeVisible();
+  });
+});
+
 test.describe("assisted search", () => {
   test("a signed-in seeker can submit a genuine assisted search request", async ({ page }) => {
     await signIn(page, "+254700000005", "Seeker123!");

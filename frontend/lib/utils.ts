@@ -133,6 +133,7 @@ export function statusTone(status: string): "green" | "amber" | "red" | "slate" 
     case "proposed":
     case "unconfirmed":
     case "awaiting_local_investigation":
+    case "cancelling":
       return "amber";
     case "rejected":
     case "suspended":
@@ -146,6 +147,7 @@ export function statusTone(status: string): "green" | "amber" | "red" | "slate" 
     case "partner_assigned":
     case "accepted":
     case "sent":
+    case "free":
       return "teal";
     default:
       return "slate";

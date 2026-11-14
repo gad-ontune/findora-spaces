@@ -16,6 +16,7 @@ import {
 import { LinkButton } from "@/components/ui/button";
 import { PageHeader } from "@/components/ui/page";
 import { serverFetch } from "@/lib/server-api";
+import type { SubscriptionPlan } from "@/lib/types";
 import { formatKes } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -24,19 +25,7 @@ export const metadata: Metadata = {
     "List a home or commercial space on Findora Spaces. Reach serious seekers, show verified details and keep availability honest.",
 };
 
-type Plan = {
-  id: string;
-  code: string;
-  name: string;
-  description: string;
-  price: number;
-  currency: string;
-  period: string;
-  features: string[];
-  listing_limit: number | null;
-};
-
-type PlansPayload = { plans: Plan[] };
+type PlansPayload = { plans: SubscriptionPlan[] };
 
 export const dynamic = "force-dynamic";
 

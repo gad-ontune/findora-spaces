@@ -18,6 +18,7 @@ import {
   LayoutDashboard,
   SearchCheck,
   ShieldCheck,
+  Sparkles,
   UserRound,
   type LucideIcon,
 } from "lucide-react";
@@ -118,6 +119,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
           ...(hasPermission("enquiry:manage")
             ? [{ href: "/dashboard/enquiries", label: "Enquiries", icon: Inbox } as NavItem]
             : []),
+          { href: "/dashboard/subscription", label: "Subscription", icon: Sparkles },
         ]
       : [];
 
