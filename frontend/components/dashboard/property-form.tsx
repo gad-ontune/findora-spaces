@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { AlertTriangle, ArrowLeft, Building2, CheckCircle2, Home, MapPin, Save, Store } from "lucide-react";
 
+import { LocationPinner } from "@/components/dashboard/location-pinner";
 import { useAuth, useToast } from "@/components/providers";
 import { Button, LinkButton } from "@/components/ui/button";
 import { InlineNote } from "@/components/ui/feedback";
@@ -33,6 +34,8 @@ type FormState = {
   address_line: string;
   directions: string;
   precision: "exact" | "approximate" | "neighbourhood";
+  latitude: string;
+  longitude: string;
   rent_amount: string;
   deposit_amount: string;
   rent_period: string;
@@ -88,6 +91,8 @@ const EMPTY_FORM: FormState = {
   address_line: "",
   directions: "",
   precision: "approximate",
+  latitude: "",
+  longitude: "",
   rent_amount: "",
   deposit_amount: "",
   rent_period: "monthly",
@@ -151,6 +156,21 @@ function textOrNull(value: string): string | null {
 function formFromProperty(property: PropertyDetail): FormState {
   const residential = property.residential;
   const commercial = property.commercial;
+  const privateLatitude = property.management?.private_latitude;
+  const privateLongitude = property.management?.private_longitude;
+  const exactFallback = property.location.precision === "exact";
+  const latitude =
+    privateLatitude !== null && privateLatitude !== undefined
+      ? String(privateLatitude)
+      : exactFallback && property.location.latitude !== null
+        ? String(property.location.latitude)
+        : "";
+  const longitude =
+    privateLongitude !== null && privateLongitude !== undefined
+      ? String(privateLongitude)
+      : exactFallback && property.location.longitude !== null
+        ? String(property.location.longitude)
+        : "";
   return {
     ...EMPTY_FORM,
     title: property.title,
@@ -163,6 +183,8 @@ function formFromProperty(property: PropertyDetail): FormState {
     address_line: property.location.address_line ?? "",
     directions: property.location.directions ?? "",
     precision: (property.location.precision as FormState["precision"]) ?? "approximate",
+    latitude,
+    longitude,
     rent_amount: property.terms?.rent_amount !== null && property.terms?.rent_amount !== undefined ? String(property.terms.rent_amount) : "",
     deposit_amount:
       property.terms?.deposit_amount !== null && property.terms?.deposit_amount !== undefined
@@ -238,6 +260,8 @@ function buildLocation(form: FormState) {
     address_line: textOrNull(form.address_line),
     directions: textOrNull(form.directions),
     precision: form.precision,
+    latitude: numberOrNull(form.latitude),
+    longitude: numberOrNull(form.longitude),
   };
 }
 
@@ -661,7 +685,7 @@ export function PropertyForm({
 
       <Section
         title="Location"
-        description="Choose the real town and neighbourhood. Public maps use an approximate position unless you deliberately choose exact."
+        description="Choose the real town and neighbourhood, then pin the exact spot with your phone if you can. Public maps use an approximate position unless you deliberately choose exact."
       >
         <div className="grid gap-4 sm:grid-cols-2">
           <Field label="Town" htmlFor="property-town" required hint={selectedTown?.county ? `${selectedTown.county} County` : undefined}>
@@ -673,6 +697,8 @@ export function PropertyForm({
                 update("town_id", event.target.value);
                 update("neighbourhood_id", "");
                 update("landmark_id", "");
+                update("latitude", "");
+                update("longitude", "");
               }}
             >
               <option value="">Choose a town</option>
@@ -717,17 +743,35 @@ export function PropertyForm({
               ))}
             </Select>
           </Field>
-          <Field label="Map precision" htmlFor="property-precision" hint="Approximate is recommended. Exact reveals the property position publicly.">
+          <Field label="Map precision" htmlFor="property-precision" hint="Approximate hides the exact pin publicly. Exact shows the captured position on the public map.">
             <Select
               id="property-precision"
               value={form.precision}
               onChange={(event) => update("precision", event.target.value as FormState["precision"])}
             >
-              <option value="approximate">Approximate — near the neighbourhood</option>
-              <option value="neighbourhood">Neighbourhood only</option>
-              <option value="exact">Exact — show the property position</option>
+              <option value="approximate">Approximate — show the neighbourhood area</option>
+              <option value="neighbourhood">Neighbourhood only — show only the neighbourhood</option>
+              <option value="exact">Exact — show the captured position publicly</option>
             </Select>
           </Field>
+        </div>
+
+        <div className="mt-4">
+          <LocationPinner
+            latitude={form.latitude}
+            longitude={form.longitude}
+            precision={form.precision}
+            onCapture={(latitude, longitude) => {
+              setForm((current) => ({
+                ...current,
+                latitude: latitude.toFixed(6),
+                longitude: longitude.toFixed(6),
+              }));
+            }}
+            onClear={() => {
+              setForm((current) => ({ ...current, latitude: "", longitude: "" }));
+            }}
+          />
         </div>
 
         <div className="mt-4 grid gap-4">

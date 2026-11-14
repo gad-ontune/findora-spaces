@@ -211,6 +211,8 @@ export type PropertyDetail = PropertySummary & {
     recorded_owner_phone: string | null;
     is_fresh: boolean;
     availability_stored: string;
+    private_latitude: number | null;
+    private_longitude: number | null;
   };
 };
 

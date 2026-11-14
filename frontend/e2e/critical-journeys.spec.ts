@@ -53,6 +53,23 @@ test.describe("authentication and role landing", () => {
   });
 });
 
+test.describe("property location pinning", () => {
+  test("a landlord can pin the exact property location with the device GPS", async ({ page, context }) => {
+    await context.grantPermissions(["geolocation"]);
+    await context.setGeolocation({ latitude: -1.246612, longitude: 34.618123, accuracy: 8 });
+
+    await signIn(page, "+254700000002", "Landlord123!");
+    await page.goto("/dashboard/properties/new");
+    await expect(page.getByRole("heading", { name: "Add a property" })).toBeVisible();
+
+    await page.getByRole("button", { name: "Use my exact current location" }).click();
+
+    await expect(page.getByText("Location pinned")).toBeVisible();
+    await expect(page.getByText("-1.246612, 34.618123")).toBeVisible();
+    await expect(page.getByText(/Phone accuracy: about 8 m/)).toBeVisible();
+  });
+});
+
 test.describe("assisted search", () => {
   test("a signed-in seeker can submit a genuine assisted search request", async ({ page }) => {
     await signIn(page, "+254700000005", "Seeker123!");
