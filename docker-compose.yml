@@ -1,0 +1,108 @@
+services:
+  db:
+    image: postgis/postgis:16-3.4
+    container_name: findora-db
+    environment:
+      POSTGRES_DB: findora
+      POSTGRES_USER: findora
+      POSTGRES_PASSWORD: findora_dev_password
+    ports:
+      - "5455:5432"
+    volumes:
+      - findora_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U findora -d findora"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  redis:
+    image: redis:7-alpine
+    container_name: findora-redis
+    ports:
+      - "6380:6379"
+    volumes:
+      - findora_redisdata:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: findora-api
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql+psycopg://findora:findora_dev_password@db:5432/findora
+      REDIS_URL: redis://redis:6379/0
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./backend/uploads:/app/uploads
+    command: >
+      sh -c "alembic upgrade head &&
+             python -m app.seed --if-empty &&
+             uvicorn app.main:app --host 0.0.0.0 --port 8000"
+
+  worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: findora-worker
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql+psycopg://findora:findora_dev_password@db:5432/findora
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./backend/uploads:/app/uploads
+    command: celery -A app.workers.celery_app worker --loglevel=info --concurrency=2
+
+  beat:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: findora-beat
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql+psycopg://findora:findora_dev_password@db:5432/findora
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    command: celery -A app.workers.celery_app beat --loglevel=info
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_BASE: /api/v1
+        BACKEND_URL: http://api:8000
+    container_name: findora-web
+    environment:
+      BACKEND_URL: http://api:8000
+      NEXT_PUBLIC_API_BASE: /api/v1
+      NEXT_PUBLIC_SITE_URL: http://localhost:3000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+
+volumes:
+  findora_pgdata:
+  findora_redisdata:
