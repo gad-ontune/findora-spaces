@@ -19,6 +19,12 @@ The first launch market is **Kehancha, Migori County**. The location model cover
 
 The backend is a modular monolith with a versioned API under `/api/v1`. The frontend proxies `/api/v1` and `/media` to FastAPI so session cookies remain same-origin.
 
+## Landlord location pinning
+
+Landlords and managers can pin the exact property position with their phone instead of describing it in words. In the listing form, they stand at the exact house or gate, switch on phone location/GPS, and press **Use my exact current location**. The browser records the device coordinates and accuracy.
+
+The captured point is stored as the private property location. The public map stays approximate unless **Map precision** is deliberately set to **Exact**. Owners and authorised staff can see the private coordinates when editing the listing; public API responses never include them.
+
 ## Repository layout
 
 ```
