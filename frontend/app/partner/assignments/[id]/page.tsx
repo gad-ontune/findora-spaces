@@ -221,7 +221,7 @@ export default function PartnerAssignmentDetailPage() {
             </h2>
             <dl className="mt-3 grid gap-3 sm:grid-cols-2">
               <div className="rounded-xl bg-ivory-100 p-3">
-                <dt className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Location</dt>
+                <dt className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Location</dt>
                 <dd className="mt-1 flex items-start gap-1.5 text-sm font-medium text-ink-800">
                   <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-teal-600" aria-hidden="true" />
                   {[assignment.request.neighbourhood, assignment.request.town].filter(Boolean).join(", ") ||
@@ -229,28 +229,28 @@ export default function PartnerAssignmentDetailPage() {
                 </dd>
               </div>
               <div className="rounded-xl bg-ivory-100 p-3">
-                <dt className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Budget</dt>
+                <dt className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Budget</dt>
                 <dd className="mt-1 text-sm font-medium text-ink-800">
                   {assignment.request.budget_min ? `${formatKes(assignment.request.budget_min)} – ` : "Up to "}
                   {formatKes(assignment.request.budget_max)}
                 </dd>
               </div>
               <div className="rounded-xl bg-ivory-100 p-3">
-                <dt className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Category and type</dt>
+                <dt className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Category and type</dt>
                 <dd className="mt-1 text-sm font-medium text-ink-800">
                   {titleize(assignment.request.category)} ·{" "}
                   {assignment.request.property_type ? titleize(assignment.request.property_type) : "Any suitable type"}
                 </dd>
               </div>
               <div className="rounded-xl bg-ivory-100 p-3">
-                <dt className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Contact preference</dt>
+                <dt className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Contact preference</dt>
                 <dd className="mt-1 text-sm font-medium text-ink-800">{titleize(assignment.request.contact_method)}</dd>
               </div>
             </dl>
 
             {assignment.request.requirements ? (
               <div className="mt-3 rounded-xl border border-ink-900/10 p-3.5">
-                <p className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Seeker brief</p>
+                <p className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Seeker brief</p>
                 <p className="mt-1 whitespace-pre-line text-sm leading-6 text-ink-600">
                   {assignment.request.requirements}
                 </p>
@@ -259,7 +259,7 @@ export default function PartnerAssignmentDetailPage() {
 
             {assignment.instructions ? (
               <div className="mt-3 rounded-xl border border-sand-300 bg-sand-100 p-3.5">
-                <p className="text-[10px] font-bold uppercase tracking-wide text-ink-500">Instructions from support</p>
+                <p className="text-[11px] font-bold uppercase tracking-wide text-ink-500">Instructions from support</p>
                 <p className="mt-1 whitespace-pre-line text-sm leading-6 text-ink-700">{assignment.instructions}</p>
               </div>
             ) : null}
@@ -425,7 +425,7 @@ export default function PartnerAssignmentDetailPage() {
                 Declined: {assignment.declined_reason}
               </p>
             ) : null}
-            <p className="mt-3 text-[11px] leading-5 text-ink-400">
+            <p className="mt-3 text-[12px] leading-5 text-ink-400">
               Completing an assignment is recorded by support after the report is reviewed. Submitting a report does not
               automatically mark the assignment complete.
             </p>
@@ -444,12 +444,12 @@ export default function PartnerAssignmentDetailPage() {
                       <p className="text-xs font-bold text-ink-800">{titleize(report.report_type)}</p>
                       <StatusBadge status={report.status} />
                     </div>
-                    <p className="mt-1 text-[11px] text-ink-400">
+                    <p className="mt-1 text-[12px] text-ink-400">
                       Submitted {formatDateTime(report.submitted_at)}
                       {report.reviewed_at ? ` · reviewed ${formatDateTime(report.reviewed_at)}` : ""}
                     </p>
                     <p className="mt-1.5 whitespace-pre-line text-sm leading-6 text-ink-600">{report.summary}</p>
-                    <p className="mt-1 text-[11px] text-ink-400">
+                    <p className="mt-1 text-[12px] text-ink-400">
                       Property found: {report.property_found ? "yes" : "no"} · Photos: {report.photos.length}
                     </p>
                     {report.review_notes ? (

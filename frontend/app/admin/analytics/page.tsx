@@ -28,7 +28,7 @@ function Breakdown({ title, data }: { title: string; data: Record<string, number
   const total = entries.reduce((sum, [, value]) => sum + value, 0);
   return (
     <div>
-      <p className="text-[10px] font-bold uppercase tracking-wide text-ink-400">{title}</p>
+      <p className="text-[11px] font-bold uppercase tracking-wide text-ink-400">{title}</p>
       {entries.length ? (
         <ul className="mt-1.5 space-y-1.5">
           {entries.map(([key, value]) => (
@@ -148,7 +148,7 @@ export default function AdminAnalyticsPage() {
                 <Breakdown title="Approved by category" data={data.supply.approved_by_category} />
                 <Breakdown title="By availability" data={data.supply.by_availability} />
                 <div className="rounded-xl bg-ivory-100 p-3">
-                  <p className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Visibility rule</p>
+                  <p className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Visibility rule</p>
                   <p className="mt-1 text-xs leading-5 text-ink-600">
                     Public listings require approval, genuine availability and freshness within the configured window.
                     &ldquo;Fresh and available&rdquo; counts exactly that intersection.
@@ -164,29 +164,29 @@ export default function AdminAnalyticsPage() {
               </h2>
               <div className="mt-3 grid gap-3 sm:grid-cols-2">
                 <div className="rounded-xl bg-ivory-100 p-3">
-                  <p className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Active landlords</p>
+                  <p className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Active landlords</p>
                   <p className="mt-1 font-display text-xl font-bold text-ink-900">
                     {formatNumber(data.landlords.active_landlords)}
                   </p>
-                  <p className="text-[11px] text-ink-400">Distinct owners with property records</p>
+                  <p className="text-[12px] text-ink-400">Distinct owners with property records</p>
                 </div>
                 <div className="rounded-xl bg-ivory-100 p-3">
-                  <p className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Enquiries received</p>
+                  <p className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Enquiries received</p>
                   <p className="mt-1 font-display text-xl font-bold text-ink-900">
                     {formatNumber(data.landlords.enquiries_received)}
                   </p>
-                  <p className="text-[11px] text-ink-400">
+                  <p className="text-[12px] text-ink-400">
                     {data.landlords.enquiry_response_rate_percent !== null
                       ? `${data.landlords.enquiry_response_rate_percent}% responded`
                       : "Response rate not available"}
                   </p>
                 </div>
                 <div className="rounded-xl bg-ivory-100 p-3 sm:col-span-2">
-                  <p className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Total property records</p>
+                  <p className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Total property records</p>
                   <p className="mt-1 font-display text-xl font-bold text-ink-900">
                     {formatNumber(data.landlords.total_properties)}
                   </p>
-                  <p className="text-[11px] text-ink-400">
+                  <p className="text-[12px] text-ink-400">
                     All records, including pending and archived. Not the public listing count.
                   </p>
                 </div>
@@ -202,20 +202,20 @@ export default function AdminAnalyticsPage() {
                 <Breakdown title="By request status" data={data.assisted.by_status} />
                 <div className="space-y-2">
                   <div className="rounded-xl bg-ivory-100 p-3">
-                    <p className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Average time to first match</p>
+                    <p className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Average time to first match</p>
                     <p className="mt-1 font-display text-xl font-bold text-ink-900">
                       {data.assisted.average_hours_to_first_match !== null
                         ? `${data.assisted.average_hours_to_first_match} hrs`
                         : "Not enough data"}
                     </p>
-                    <p className="text-[11px] text-ink-400">
+                    <p className="text-[12px] text-ink-400">
                       Computed only from requests that have a recorded match.
                     </p>
                   </div>
                   <div className="rounded-xl bg-ivory-100 p-3">
-                    <p className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Completed</p>
+                    <p className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Completed</p>
                     <p className="mt-1 font-display text-xl font-bold text-ink-900">{formatNumber(data.assisted.completed)}</p>
-                    <p className="text-[11px] text-ink-400">
+                    <p className="text-[12px] text-ink-400">
                       Requests closed as completed, not cancelled or unmatched.
                     </p>
                   </div>
@@ -232,21 +232,21 @@ export default function AdminAnalyticsPage() {
                 <Breakdown title="By viewing status" data={data.viewings.by_status} />
                 <div className="space-y-2">
                   <div className="rounded-xl bg-ivory-100 p-3">
-                    <p className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Total viewings</p>
+                    <p className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Total viewings</p>
                     <p className="mt-1 font-display text-xl font-bold text-ink-900">{formatNumber(data.viewings.total)}</p>
                   </div>
                   <div className="rounded-xl bg-ivory-100 p-3">
-                    <p className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Feedback submitted</p>
+                    <p className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Feedback submitted</p>
                     <p className="mt-1 font-display text-xl font-bold text-ink-900">
                       {formatNumber(data.viewings.feedback_submitted)}
                     </p>
                   </div>
                   <div className="rounded-xl bg-terracotta-100 p-3">
-                    <p className="text-[10px] font-bold uppercase tracking-wide text-terracotta-700">Negative outcomes</p>
+                    <p className="text-[11px] font-bold uppercase tracking-wide text-terracotta-700">Negative outcomes</p>
                     <p className="mt-1 font-display text-xl font-bold text-terracotta-800">
                       {formatNumber(data.viewings.negative_outcomes)}
                     </p>
-                    <p className="text-[11px] text-terracotta-700">
+                    <p className="text-[12px] text-terracotta-700">
                       Photos, description, rent or fraud flags. Investigate; do not treat as proof.
                     </p>
                   </div>
@@ -263,17 +263,17 @@ export default function AdminAnalyticsPage() {
             <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
               {Object.entries(data.finance.payments).map(([status, totals]) => (
                 <div key={status} className="rounded-xl bg-ivory-100 p-3">
-                  <p className="text-[10px] font-bold uppercase tracking-wide text-ink-400">{titleize(status)}</p>
+                  <p className="text-[11px] font-bold uppercase tracking-wide text-ink-400">{titleize(status)}</p>
                   <p className="mt-1 font-display text-lg font-bold text-ink-900">{formatKes(totals.amount)}</p>
-                  <p className="text-[11px] text-ink-400">
+                  <p className="text-[12px] text-ink-400">
                     {formatNumber(totals.count)} payment{totals.count === 1 ? "" : "s"}
                   </p>
                 </div>
               ))}
               <div className="rounded-xl bg-ivory-100 p-3">
-                <p className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Refunded total</p>
+                <p className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Refunded total</p>
                 <p className="mt-1 font-display text-lg font-bold text-ink-900">{formatKes(data.finance.refunded_total)}</p>
-                <p className="text-[11px] text-ink-400">Completed refunds only</p>
+                <p className="text-[12px] text-ink-400">Completed refunds only</p>
               </div>
             </div>
             {Object.keys(data.finance.payments).length === 0 ? (

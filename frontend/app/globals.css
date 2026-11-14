@@ -20,6 +20,8 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
+  font-size: 1.0625rem;
+  line-height: 1.625;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   text-rendering: optimizeLegibility;
 }
@@ -68,7 +70,7 @@ body {
   }
 
   .field {
-    @apply w-full rounded-xl border border-ink-900/15 bg-white px-3.5 py-2.5 text-[15px] text-ink-800 shadow-sm outline-none transition placeholder:text-ink-300 focus:border-teal-500 focus:ring-4 focus:ring-teal-500/10 disabled:cursor-not-allowed disabled:bg-ink-50;
+    @apply w-full rounded-xl border border-ink-900/15 bg-white px-3.5 py-2.5 text-[16px] text-ink-800 shadow-sm outline-none transition placeholder:text-ink-300 focus:border-teal-500 focus:ring-4 focus:ring-teal-500/10 disabled:cursor-not-allowed disabled:bg-ink-50;
   }
 
   .field-error {
@@ -84,7 +86,7 @@ body {
   }
 
   .prose-findora {
-    @apply text-[15px] leading-7 text-ink-600;
+    @apply text-[16px] leading-7 text-ink-600;
   }
 }
 

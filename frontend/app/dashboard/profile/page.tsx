@@ -361,10 +361,10 @@ export default function ProfilePage() {
                         <p className="text-xs font-semibold text-ink-800">
                           {session.current ? "This device" : "Other device"}
                         </p>
-                        <p className="mt-0.5 line-clamp-1 text-[11px] text-ink-400">
+                        <p className="mt-0.5 line-clamp-1 text-[12px] text-ink-400">
                           {session.user_agent ?? "Unknown browser"} · {session.ip_address ?? "IP hidden"}
                         </p>
-                        <p className="text-[11px] text-ink-400">Last used {formatDateTime(session.last_used_at)}</p>
+                        <p className="text-[12px] text-ink-400">Last used {formatDateTime(session.last_used_at)}</p>
                       </div>
                       <Button
                         variant="ghost"

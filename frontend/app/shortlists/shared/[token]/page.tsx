@@ -88,7 +88,7 @@ export default async function SharedShortlistPage({
                 <li key={comment.id} className="rounded-2xl border border-ink-900/10 bg-white p-4">
                   <div className="flex items-center justify-between gap-2">
                     <p className="text-sm font-bold text-ink-800">{comment.author_name}</p>
-                    <p className="text-[11px] text-ink-400">{formatDateTime(comment.created_at)}</p>
+                    <p className="text-[12px] text-ink-400">{formatDateTime(comment.created_at)}</p>
                   </div>
                   <p className="mt-1.5 whitespace-pre-line text-sm leading-6 text-ink-600">{comment.body}</p>
                 </li>

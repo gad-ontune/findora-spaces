@@ -272,16 +272,16 @@ export default async function PropertyDetailPage({
             <dl className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3">
               {visibleDetails.map((detail) => (
                 <div key={detail.label} className="rounded-xl border border-ink-900/10 bg-white p-3.5">
-                  <dt className="text-[11px] font-semibold uppercase tracking-wide text-ink-400">{detail.label}</dt>
+                  <dt className="text-[12px] font-semibold uppercase tracking-wide text-ink-400">{detail.label}</dt>
                   <dd className="mt-1 text-sm font-semibold text-ink-800">{detail.value}</dd>
                 </div>
               ))}
               <div className="rounded-xl border border-ink-900/10 bg-white p-3.5">
-                <dt className="text-[11px] font-semibold uppercase tracking-wide text-ink-400">Reference</dt>
+                <dt className="text-[12px] font-semibold uppercase tracking-wide text-ink-400">Reference</dt>
                 <dd className="mt-1 text-sm font-semibold text-ink-800">{property.reference}</dd>
               </div>
               <div className="rounded-xl border border-ink-900/10 bg-white p-3.5">
-                <dt className="text-[11px] font-semibold uppercase tracking-wide text-ink-400">Available from</dt>
+                <dt className="text-[12px] font-semibold uppercase tracking-wide text-ink-400">Available from</dt>
                 <dd className="mt-1 text-sm font-semibold text-ink-800">
                   {property.terms.available_from ? formatDate(property.terms.available_from) : "Now, subject to confirmation"}
                 </dd>

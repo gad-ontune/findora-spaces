@@ -38,7 +38,7 @@ export function PropertyGallery({ media, title }: { media: Media[]; title: strin
         />
         <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 bg-gradient-to-t from-ink-900/60 to-transparent p-3">
           <p className="line-clamp-1 text-xs font-medium text-white/90">{current.caption ?? "Illustrative image"}</p>
-          <span className="rounded-lg bg-ink-900/70 px-2 py-1 text-[11px] font-semibold text-white">
+          <span className="rounded-lg bg-ink-900/70 px-2 py-1 text-[12px] font-semibold text-white">
             {index + 1} / {images.length}
           </span>
         </div>

@@ -26,7 +26,7 @@ export function Logo({ className, light }: { className?: string; light?: boolean
         <span className={cn("block font-display text-lg font-extrabold tracking-tight", light ? "text-ivory-50" : "text-ink-900")}>
           Findora
         </span>
-        <span className={cn("mt-0.5 block text-[10px] font-semibold uppercase tracking-[0.22em]", light ? "text-sage-300" : "text-teal-600")}>
+        <span className={cn("mt-0.5 block text-[11px] font-semibold uppercase tracking-[0.22em]", light ? "text-sage-300" : "text-teal-600")}>
           Spaces
         </span>
       </span>

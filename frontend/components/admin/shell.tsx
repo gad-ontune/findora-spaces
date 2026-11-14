@@ -69,7 +69,7 @@ function NavLink({ item, pathname }: { item: NavItem; pathname: string }) {
       {item.count ? (
         <span
           className={cn(
-            "rounded-full px-1.5 py-0.5 text-[10px] font-bold leading-none",
+            "rounded-full px-1.5 py-0.5 text-[11px] font-bold leading-none",
             active ? "bg-white/20 text-ivory-50" : "bg-sand-200 text-ink-700",
           )}
         >
@@ -302,7 +302,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
             <nav className="mt-4 space-y-4" aria-label="Admin navigation">
               {visibleGroups.map((group) => (
                 <div key={group.label}>
-                  <p className="px-3 text-[10px] font-bold uppercase tracking-[0.16em] text-ink-400">{group.label}</p>
+                  <p className="px-3 text-[11px] font-bold uppercase tracking-[0.16em] text-ink-400">{group.label}</p>
                   <div className="mt-1 space-y-0.5">
                     {group.items.map((item) => (
                       <NavLink key={item.href} item={item} pathname={pathname} />
@@ -330,7 +330,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
             </div>
           </div>
 
-          <p className="mt-3 px-2 text-[11px] leading-5 text-ink-400">
+          <p className="mt-3 px-2 text-[12px] leading-5 text-ink-400">
             Admin actions are audited. Never invent verification results, availability or payment outcomes.
           </p>
         </aside>

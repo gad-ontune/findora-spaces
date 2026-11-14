@@ -144,7 +144,7 @@ export default function PartnerAssignmentsPage() {
                 </p>
               ) : null}
 
-              <dl className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-[11px] text-ink-400">
+              <dl className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-[12px] text-ink-400">
                 <div className="flex gap-1">
                   <dt>Offered:</dt>
                   <dd>{formatDate(assignment.created_at)}</dd>

@@ -86,7 +86,7 @@ export function HeroSearch({ townNames }: { townNames: string[] }) {
           Search
         </Button>
       </form>
-      <p className="mt-2 px-1 text-[11px] leading-5 text-ink-400">
+      <p className="mt-2 px-1 text-[12px] leading-5 text-ink-400">
         Only approved listings with availability confirmed in the last 14 days appear in results.
       </p>
     </div>

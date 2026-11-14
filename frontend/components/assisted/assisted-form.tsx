@@ -216,7 +216,7 @@ export function AssistedRequestForm({
                 </Button>
               )}
             </div>
-            <p className="mt-2 text-[11px] text-ink-500">
+            <p className="mt-2 text-[12px] text-ink-500">
               Demo mode: M-Pesa is simulated. No real money is charged. A payment only succeeds when the provider
               confirms it.
             </p>
@@ -577,7 +577,7 @@ export function AssistedRequestForm({
         Submit assisted search request
       </Button>
 
-      <div className="mt-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[11px] text-ink-400">
+      <div className="mt-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[12px] text-ink-400">
         <span className="inline-flex items-center gap-1">
           <ShieldCheck className="h-3.5 w-3.5" aria-hidden="true" />
           No invented matches

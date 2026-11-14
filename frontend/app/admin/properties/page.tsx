@@ -196,7 +196,7 @@ export default function AdminPropertiesPage() {
             <table className="w-full min-w-[860px] border-collapse text-left text-sm">
               <caption className="sr-only">Property records with moderation and availability status</caption>
               <thead>
-                <tr className="border-b border-ink-900/10 bg-ivory-100 text-[11px] uppercase tracking-wide text-ink-500">
+                <tr className="border-b border-ink-900/10 bg-ivory-100 text-[12px] uppercase tracking-wide text-ink-500">
                   <th scope="col" className="px-4 py-3 font-semibold">Property</th>
                   <th scope="col" className="px-4 py-3 font-semibold">Status</th>
                   <th scope="col" className="px-4 py-3 font-semibold">Location</th>
@@ -224,7 +224,7 @@ export default function AdminPropertiesPage() {
                         )}
                         <div className="min-w-0">
                           <p className="max-w-[220px] truncate font-semibold text-ink-800">{property.title}</p>
-                          <p className="text-[11px] text-ink-400">
+                          <p className="text-[12px] text-ink-400">
                             {property.reference} · {propertyTypeLabel(property.property_type)}
                             {property.is_featured ? " · featured" : ""}
                           </p>
@@ -243,17 +243,17 @@ export default function AdminPropertiesPage() {
                     <td className="px-4 py-3 text-xs text-ink-600">
                       {[property.location.neighbourhood, property.location.town].filter(Boolean).join(", ") ||
                         "Not recorded"}
-                      <span className="mt-0.5 block text-[11px] text-ink-400">
+                      <span className="mt-0.5 block text-[12px] text-ink-400">
                         {titleize(property.category)}
                       </span>
                     </td>
                     <td className="px-4 py-3 text-xs text-ink-700">
                       {formatKes(property.rent_amount)}
-                      <span className="block text-[11px] text-ink-400">per {property.rent_period}</span>
+                      <span className="block text-[12px] text-ink-400">per {property.rent_period}</span>
                     </td>
                     <td className="px-4 py-3 text-xs text-ink-600">
                       {property.recorded_owner_name ?? "Not recorded"}
-                      <span className="mt-0.5 block text-[11px] text-ink-400">
+                      <span className="mt-0.5 block text-[12px] text-ink-400">
                         {property.verification.verified_count} verified check
                         {property.verification.verified_count === 1 ? "" : "s"}
                       </span>

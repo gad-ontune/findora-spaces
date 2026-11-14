@@ -156,7 +156,7 @@ export default function NotificationsPage() {
                       <div className="min-w-0 flex-1">
                         <div className="flex flex-wrap items-start justify-between gap-2">
                           <p className="text-sm font-semibold text-ink-900">{notification.title}</p>
-                          <span className="text-[11px] text-ink-400">{formatDateTime(notification.created_at)}</span>
+                          <span className="text-[12px] text-ink-400">{formatDateTime(notification.created_at)}</span>
                         </div>
                         <p className="mt-0.5 text-sm leading-6 text-ink-500">{notification.body}</p>
                         <div className="mt-1.5 flex flex-wrap items-center gap-3">

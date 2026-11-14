@@ -210,7 +210,7 @@ export default function EditPropertyPage() {
               {item.count ? (
                 <span
                   className={cn(
-                    "rounded-full px-1.5 py-0.5 text-[10px] font-bold",
+                    "rounded-full px-1.5 py-0.5 text-[11px] font-bold",
                     active ? "bg-white/20 text-ivory-50" : "bg-ivory-200 text-ink-500",
                   )}
                 >

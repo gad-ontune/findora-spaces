@@ -156,13 +156,13 @@ export default function EnquiriesPage() {
 
                       {enquiry.response ? (
                         <div className="mt-2 rounded-xl border border-teal-200 bg-teal-50 px-3.5 py-3">
-                          <p className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wide text-teal-800">
+                          <p className="flex items-center gap-1.5 text-[12px] font-bold uppercase tracking-wide text-teal-800">
                             <MessageSquare className="h-3.5 w-3.5" aria-hidden="true" />
                             {role === "received" ? "Your response" : "Property team response"}
                           </p>
                           <p className="mt-1 whitespace-pre-line text-sm leading-6 text-teal-900/85">{enquiry.response}</p>
                           {enquiry.responded_at ? (
-                            <p className="mt-1 text-[11px] text-teal-900/60">
+                            <p className="mt-1 text-[12px] text-teal-900/60">
                               {formatDateTime(enquiry.responded_at)}
                             </p>
                           ) : null}

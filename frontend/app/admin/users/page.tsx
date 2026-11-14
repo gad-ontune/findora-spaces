@@ -235,7 +235,7 @@ export default function AdminUsersPage() {
             <table className="w-full min-w-[860px] border-collapse text-left text-sm">
               <caption className="sr-only">Platform user accounts with roles and status</caption>
               <thead>
-                <tr className="border-b border-ink-900/10 bg-ivory-100 text-[11px] uppercase tracking-wide text-ink-500">
+                <tr className="border-b border-ink-900/10 bg-ivory-100 text-[12px] uppercase tracking-wide text-ink-500">
                   <th scope="col" className="px-4 py-3 font-semibold">Account</th>
                   <th scope="col" className="px-4 py-3 font-semibold">Roles</th>
                   <th scope="col" className="px-4 py-3 font-semibold">Status</th>
@@ -256,9 +256,9 @@ export default function AdminUsersPage() {
                         <div className="min-w-0">
                           <p className="truncate font-semibold text-ink-800">
                             {user.name}
-                            {user.id === currentUser?.id ? <span className="ml-1.5 text-[10px] text-ink-400">(you)</span> : null}
+                            {user.id === currentUser?.id ? <span className="ml-1.5 text-[11px] text-ink-400">(you)</span> : null}
                           </p>
-                          <p className="truncate text-[11px] text-ink-400">{user.email ?? "No email recorded"}</p>
+                          <p className="truncate text-[12px] text-ink-400">{user.email ?? "No email recorded"}</p>
                         </div>
                       </div>
                     </td>
@@ -274,12 +274,12 @@ export default function AdminUsersPage() {
                     <td className="px-4 py-3">
                       <StatusBadge status={user.status} />
                       {user.locked_until ? (
-                        <p className="mt-1 text-[10px] text-terracotta-700">Locked until {formatDateTime(user.locked_until)}</p>
+                        <p className="mt-1 text-[11px] text-terracotta-700">Locked until {formatDateTime(user.locked_until)}</p>
                       ) : null}
                     </td>
                     <td className="px-4 py-3 text-xs text-ink-600">
                       {user.phone}
-                      <span className="mt-0.5 block text-[11px] text-ink-400">
+                      <span className="mt-0.5 block text-[12px] text-ink-400">
                         {user.phone_verified ? "verified" : "not verified"}
                       </span>
                     </td>

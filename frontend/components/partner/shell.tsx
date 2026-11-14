@@ -130,7 +130,7 @@ export function PartnerShell({ children }: { children: React.ReactNode }) {
             </div>
           </div>
 
-          <p className="mt-3 px-2 text-[11px] leading-5 text-ink-400">
+          <p className="mt-3 px-2 text-[12px] leading-5 text-ink-400">
             Field reports and assignments are part of the demo. Submit only genuine findings.
           </p>
         </aside>

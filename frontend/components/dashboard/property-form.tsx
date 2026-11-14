@@ -1161,7 +1161,7 @@ export function PropertyForm({
                   />
                   <span>
                     <span className="block font-medium text-ink-800">{amenity.name}</span>
-                    <span className="block text-[11px] uppercase tracking-wide text-ink-400">{titleize(amenity.category)}</span>
+                    <span className="block text-[12px] uppercase tracking-wide text-ink-400">{titleize(amenity.category)}</span>
                   </span>
                 </label>
               );

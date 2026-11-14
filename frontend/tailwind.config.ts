@@ -70,6 +70,18 @@ const config: Config = {
         display: ["var(--font-manrope)", "system-ui", "sans-serif"],
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
       },
+      // Slightly larger type than Tailwind's defaults for comfortable
+      // reading on low-end phones and in bright outdoor light.
+      fontSize: {
+        xs: ["0.8125rem", { lineHeight: "1.125rem" }],
+        sm: ["0.9375rem", { lineHeight: "1.375rem" }],
+        base: ["1.0625rem", { lineHeight: "1.625rem" }],
+        lg: ["1.1875rem", { lineHeight: "1.75rem" }],
+        xl: ["1.3125rem", { lineHeight: "1.8125rem" }],
+        "2xl": ["1.5625rem", { lineHeight: "2rem" }],
+        "3xl": ["1.9375rem", { lineHeight: "2.3125rem" }],
+        "4xl": ["2.3125rem", { lineHeight: "2.625rem" }],
+      },
       boxShadow: {
         card: "0 1px 2px rgba(17,28,26,0.04), 0 8px 24px -12px rgba(17,28,26,0.16)",
         lift: "0 2px 4px rgba(17,28,26,0.06), 0 18px 40px -20px rgba(17,28,26,0.28)",

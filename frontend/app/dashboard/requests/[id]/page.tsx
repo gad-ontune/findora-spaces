@@ -197,7 +197,7 @@ export default function AssistedRequestDetailPage() {
 
       <div className="grid gap-3 sm:grid-cols-3">
         <div className="surface p-4">
-          <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-ink-400">
+          <p className="flex items-center gap-1.5 text-[12px] font-semibold uppercase tracking-wide text-ink-400">
             {request.category === "commercial" ? <Store className="h-3.5 w-3.5" /> : <Home className="h-3.5 w-3.5" />}
             Looking for
           </p>
@@ -210,7 +210,7 @@ export default function AssistedRequestDetailPage() {
           </p>
         </div>
         <div className="surface p-4">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-ink-400">Budget</p>
+          <p className="text-[12px] font-semibold uppercase tracking-wide text-ink-400">Budget</p>
           <p className="mt-1 text-sm font-semibold text-ink-800">
             {request.budget_min ? `${formatKes(request.budget_min)} – ` : "Up to "}
             {formatKes(request.budget_max)}
@@ -218,7 +218,7 @@ export default function AssistedRequestDetailPage() {
           <p className="mt-0.5 text-xs text-ink-500">per month</p>
         </div>
         <div className="surface p-4">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-ink-400">Genuine matches</p>
+          <p className="text-[12px] font-semibold uppercase tracking-wide text-ink-400">Genuine matches</p>
           <p className="mt-1 font-display text-2xl font-bold text-teal-700">{request.match_count}</p>
           <p className="mt-0.5 text-xs text-ink-500">shared with you</p>
         </div>
@@ -378,7 +378,7 @@ export default function AssistedRequestDetailPage() {
                     </span>
                     <div className="min-w-0 pt-0.5">
                       <p className="text-xs font-semibold text-ink-800">{titleize(event.to)}</p>
-                      <p className="text-[11px] text-ink-400">{formatDateTime(event.created_at)}</p>
+                      <p className="text-[12px] text-ink-400">{formatDateTime(event.created_at)}</p>
                       {event.notes ? <p className="mt-1 text-xs leading-5 text-ink-500">{event.notes}</p> : null}
                     </div>
                   </li>
@@ -411,7 +411,7 @@ export default function AssistedRequestDetailPage() {
                   <CreditCard className="h-4 w-4" aria-hidden="true" />
                   Pay KES 300
                 </Button>
-                <p className="mt-2 text-[11px] leading-5 text-ink-400">
+                <p className="mt-2 text-[12px] leading-5 text-ink-400">
                   Demo mode: M-Pesa is simulated. A payment is only shown as successful when the backend confirms it.
                 </p>
               </>
@@ -427,8 +427,8 @@ export default function AssistedRequestDetailPage() {
               {request.messages.map((item) => (
                 <li key={item.id} className="rounded-xl bg-ivory-100 p-3">
                   <div className="flex items-center justify-between gap-2">
-                    <p className="text-[11px] font-bold text-ink-700">{item.sender_name}</p>
-                    <p className="text-[10px] text-ink-400">{formatDateTime(item.created_at)}</p>
+                    <p className="text-[12px] font-bold text-ink-700">{item.sender_name}</p>
+                    <p className="text-[11px] text-ink-400">{formatDateTime(item.created_at)}</p>
                   </div>
                   <p className="mt-1 whitespace-pre-line text-sm leading-6 text-ink-600">{item.body}</p>
                 </li>

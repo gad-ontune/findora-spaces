@@ -408,7 +408,7 @@ export default function AdminRequestDetailPage() {
             </h2>
             <dl className="mt-3 grid gap-3 sm:grid-cols-2">
               <div className="rounded-xl bg-ivory-100 p-3">
-                <dt className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Location</dt>
+                <dt className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Location</dt>
                 <dd className="mt-1 flex items-start gap-1.5 text-sm font-medium text-ink-800">
                   <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-teal-600" aria-hidden="true" />
                   {[request.neighbourhood, request.town].filter(Boolean).join(", ") || "Not recorded"}
@@ -416,14 +416,14 @@ export default function AdminRequestDetailPage() {
                 </dd>
               </div>
               <div className="rounded-xl bg-ivory-100 p-3">
-                <dt className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Budget</dt>
+                <dt className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Budget</dt>
                 <dd className="mt-1 text-sm font-medium text-ink-800">
                   {request.budget_min ? `${formatKes(request.budget_min)} – ` : "Up to "}
                   {formatKes(request.budget_max)}
                 </dd>
               </div>
               <div className="rounded-xl bg-ivory-100 p-3">
-                <dt className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Property requirements</dt>
+                <dt className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Property requirements</dt>
                 <dd className="mt-1 text-sm font-medium text-ink-800">
                   {request.property_type ? titleize(request.property_type) : "Any suitable type"}
                   {request.bedrooms_min ? ` · ${request.bedrooms_min}+ bedrooms` : ""}
@@ -432,7 +432,7 @@ export default function AdminRequestDetailPage() {
                 </dd>
               </div>
               <div className="rounded-xl bg-ivory-100 p-3">
-                <dt className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Move-in and use</dt>
+                <dt className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Move-in and use</dt>
                 <dd className="mt-1 text-sm font-medium text-ink-800">
                   {request.move_in_date ? `Move in ${formatDate(request.move_in_date)}` : "Move-in date flexible"}
                   {request.business_type ? ` · ${request.business_type}` : ""}
@@ -441,7 +441,7 @@ export default function AdminRequestDetailPage() {
             </dl>
 
             <div className="mt-3 rounded-xl border border-ink-900/10 p-3.5">
-              <p className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Requirements</p>
+              <p className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Requirements</p>
               <p className="mt-1 whitespace-pre-line text-sm leading-6 text-ink-600">
                 {request.requirements || "No requirements recorded."}
               </p>
@@ -449,7 +449,7 @@ export default function AdminRequestDetailPage() {
 
             {request.assistance_requirements ? (
               <div className="mt-2 rounded-xl border border-ink-900/10 p-3.5">
-                <p className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Assistance requested</p>
+                <p className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Assistance requested</p>
                 <p className="mt-1 whitespace-pre-line text-sm leading-6 text-ink-600">
                   {request.assistance_requirements}
                 </p>
@@ -512,7 +512,7 @@ export default function AdminRequestDetailPage() {
                 ) : null}
 
                 <div className="mt-3">
-                  <p className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Recorded matches</p>
+                  <p className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Recorded matches</p>
                   {matches.persisted.length ? (
                     <ul className="mt-1.5 space-y-2">
                       {matches.persisted.map((match) => (
@@ -563,7 +563,7 @@ export default function AdminRequestDetailPage() {
                 </div>
 
                 <div className="mt-4">
-                  <p className="text-[10px] font-bold uppercase tracking-wide text-ink-400">
+                  <p className="text-[11px] font-bold uppercase tracking-wide text-ink-400">
                     Current suggestions (not yet shared)
                   </p>
                   {matches.suggestions.length ? (
@@ -579,7 +579,7 @@ export default function AdminRequestDetailPage() {
                   )}
                 </div>
 
-                <p className="mt-3 text-[11px] leading-5 text-ink-400">{matches.message}</p>
+                <p className="mt-3 text-[12px] leading-5 text-ink-400">{matches.message}</p>
               </>
             )}
           </section>
@@ -613,7 +613,7 @@ export default function AdminRequestDetailPage() {
                     ) : null}
 
                     <div className="mt-2">
-                      <p className="text-[10px] font-bold uppercase tracking-wide text-ink-400">
+                      <p className="text-[11px] font-bold uppercase tracking-wide text-ink-400">
                         Field reports ({assignment.reports.length})
                       </p>
                       {assignment.reports.length ? (
@@ -642,12 +642,12 @@ export default function AdminRequestDetailPage() {
                                 </div>
                               </div>
                               <p className="mt-1 whitespace-pre-line text-xs leading-5 text-ink-600">{report.summary}</p>
-                              <p className="mt-0.5 text-[11px] text-ink-400">
+                              <p className="mt-0.5 text-[12px] text-ink-400">
                                 Property found: {report.property_found ? "yes" : "no"} · photos: {report.photos.length} ·
                                 contact: {report.contact_name ?? "not recorded"}
                               </p>
                               {report.review_notes ? (
-                                <p className="mt-1 rounded bg-white px-2 py-1 text-[11px] leading-5 text-teal-900/80">
+                                <p className="mt-1 rounded bg-white px-2 py-1 text-[12px] leading-5 text-teal-900/80">
                                   <strong className="font-semibold">Review:</strong> {report.review_notes}
                                 </p>
                               ) : null}
@@ -687,9 +687,9 @@ export default function AdminRequestDetailPage() {
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <p className="text-xs font-semibold text-ink-800">
                         {message.sender_name}
-                        {message.is_internal ? <span className="ml-1.5 text-[10px] text-amber-800">internal</span> : null}
+                        {message.is_internal ? <span className="ml-1.5 text-[11px] text-amber-800">internal</span> : null}
                       </p>
-                      <p className="text-[11px] text-ink-400">{formatDateTime(message.created_at)}</p>
+                      <p className="text-[12px] text-ink-400">{formatDateTime(message.created_at)}</p>
                     </div>
                     <p className="mt-1 whitespace-pre-line text-sm leading-6 text-ink-600">{message.body}</p>
                   </li>
@@ -822,7 +822,7 @@ export default function AdminRequestDetailPage() {
                 Offer assignment
               </Button>
               {!activePartners.length ? (
-                <p className="text-[11px] leading-5 text-ink-400">
+                <p className="text-[12px] leading-5 text-ink-400">
                   No active partners are available. Approve a partner application first.
                 </p>
               ) : null}
@@ -842,8 +842,8 @@ export default function AdminRequestDetailPage() {
                       {entry.from ? `${STATUS_LABELS[entry.from] ?? titleize(entry.from)} → ` : ""}
                       {STATUS_LABELS[entry.to] ?? titleize(entry.to)}
                     </p>
-                    <p className="text-[11px] text-ink-400">{formatDateTime(entry.created_at)}</p>
-                    {entry.notes ? <p className="mt-0.5 text-[11px] leading-5 text-ink-500">{entry.notes}</p> : null}
+                    <p className="text-[12px] text-ink-400">{formatDateTime(entry.created_at)}</p>
+                    {entry.notes ? <p className="mt-0.5 text-[12px] leading-5 text-ink-500">{entry.notes}</p> : null}
                   </li>
                 ))}
               </ol>
@@ -1104,7 +1104,7 @@ function SuggestionRow({ suggestion }: { suggestion: MatchSuggestion }) {
           ))}
         </div>
       ) : null}
-      <p className="mt-1 text-[11px] text-ink-400">
+      <p className="mt-1 text-[12px] text-ink-400">
         Availability: {property.availability_status.replace(/_/g, " ")} · {property.is_fresh ? "fresh" : "needs reconfirmation"} ·
         verification: {property.verification.level}
       </p>

@@ -64,7 +64,7 @@ export function PropertyCard({
             ) : null}
           </div>
           <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between gap-2">
-            <span className="rounded-lg bg-ink-900/80 px-2 py-1 text-[11px] font-semibold text-white backdrop-blur">
+            <span className="rounded-lg bg-ink-900/80 px-2 py-1 text-[12px] font-semibold text-white backdrop-blur">
               {confirmedDays === null
                 ? "Availability not confirmed"
                 : confirmedDays === 0
@@ -95,7 +95,7 @@ export function PropertyCard({
           </Badge>
         </div>
 
-        <h3 className="mt-2.5 line-clamp-2 font-display text-[15px] font-semibold leading-6 text-ink-800">
+        <h3 className="mt-2.5 line-clamp-2 font-display text-[16px] font-semibold leading-6 text-ink-800">
           <Link href={`/properties/${property.id}`} className="hover:text-teal-700">
             {property.title}
           </Link>
@@ -127,7 +127,7 @@ export function PropertyCard({
         <div className="mt-3 flex items-center justify-between gap-2">
           <span
             className={cn(
-              "inline-flex items-center gap-1 text-[11px] font-semibold",
+              "inline-flex items-center gap-1 text-[12px] font-semibold",
               property.availability_status === "available" && property.is_fresh
                 ? "text-teal-700"
                 : "text-sand-500",
@@ -136,7 +136,7 @@ export function PropertyCard({
             <CalendarCheck2 className="h-3.5 w-3.5" aria-hidden="true" />
             {availabilityLabel(property.availability_status, property.is_fresh)}
           </span>
-          <span className="text-[11px] font-medium text-ink-400">
+          <span className="text-[12px] font-medium text-ink-400">
             {property.verification.verified_count}/{property.verification.checks.length || 8} checks
           </span>
         </div>

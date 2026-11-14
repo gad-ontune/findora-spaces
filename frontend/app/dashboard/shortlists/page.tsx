@@ -157,7 +157,7 @@ export default function ShortlistsPage() {
                           loading="lazy"
                         />
                       ) : (
-                        <span className="flex h-12 w-16 shrink-0 items-center justify-center rounded-lg bg-ivory-200 text-[10px] text-ink-400">
+                        <span className="flex h-12 w-16 shrink-0 items-center justify-center rounded-lg bg-ivory-200 text-[11px] text-ink-400">
                           No photo
                         </span>
                       )}
@@ -202,7 +202,7 @@ export default function ShortlistsPage() {
 
               {shortlist.comments.length ? (
                 <div className="border-t border-ink-900/10 p-4">
-                  <p className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wide text-ink-400">
+                  <p className="flex items-center gap-1.5 text-[12px] font-bold uppercase tracking-wide text-ink-400">
                     <MessageSquare className="h-3.5 w-3.5" aria-hidden="true" />
                     Latest comment
                   </p>

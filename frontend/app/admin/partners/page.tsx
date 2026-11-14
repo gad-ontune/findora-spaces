@@ -169,27 +169,27 @@ export default function AdminPartnersPage() {
 
               <dl className="mt-3 grid grid-cols-2 gap-2 text-xs">
                 <div className="rounded-lg bg-ivory-100 px-2.5 py-2">
-                  <dt className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Contact</dt>
+                  <dt className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Contact</dt>
                   <dd className="mt-0.5 font-medium text-ink-700">{partner.phone ?? "Not recorded"}</dd>
                 </div>
                 <div className="rounded-lg bg-ivory-100 px-2.5 py-2">
-                  <dt className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Service areas</dt>
+                  <dt className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Service areas</dt>
                   <dd className="mt-0.5 flex items-center gap-1 font-medium text-ink-700">
                     <MapPin className="h-3 w-3 text-teal-600" aria-hidden="true" />
                     {partner.service_areas.length} town{partner.service_areas.length === 1 ? "" : "s"}
                   </dd>
                 </div>
                 <div className="rounded-lg bg-ivory-100 px-2.5 py-2">
-                  <dt className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Assignments</dt>
+                  <dt className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Assignments</dt>
                   <dd className="mt-0.5 font-medium text-ink-700">{partner.assignments}</dd>
                 </div>
                 <div className="rounded-lg bg-ivory-100 px-2.5 py-2">
-                  <dt className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Completed</dt>
+                  <dt className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Completed</dt>
                   <dd className="mt-0.5 font-medium text-ink-700">{partner.completed_assignments}</dd>
                 </div>
               </dl>
 
-              <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] text-ink-400">
+              <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-[12px] text-ink-400">
                 <span className="inline-flex items-center gap-1">
                   <Star className="h-3 w-3 text-amber-600" aria-hidden="true" />
                   {partner.rating !== null ? `${partner.rating.toFixed(1)} rating` : "No rating yet"}

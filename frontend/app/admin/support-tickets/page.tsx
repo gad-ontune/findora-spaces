@@ -152,14 +152,14 @@ export default function AdminSupportTicketsPage() {
               </Badge>
             </div>
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Description</p>
+              <p className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Description</p>
               <p className="mt-1 whitespace-pre-line rounded-xl border border-ink-900/10 px-3.5 py-3 text-sm leading-6 text-ink-600">
                 {selected.description}
               </p>
             </div>
             {selected.resolution ? (
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Resolution</p>
+                <p className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Resolution</p>
                 <p className="mt-1 whitespace-pre-line rounded-xl border border-teal-200 bg-teal-50 px-3.5 py-3 text-sm leading-6 text-teal-900">
                   {selected.resolution}
                 </p>

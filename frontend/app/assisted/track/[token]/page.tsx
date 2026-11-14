@@ -85,7 +85,7 @@ export default async function TrackRequestPage({
 
         <div className="mt-6 grid gap-3 sm:grid-cols-3">
           <div className="rounded-2xl border border-ink-900/10 bg-white p-4">
-            <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-ink-400">
+            <p className="flex items-center gap-1.5 text-[12px] font-semibold uppercase tracking-wide text-ink-400">
               {request.category === "commercial" ? <Store className="h-3.5 w-3.5" /> : <Home className="h-3.5 w-3.5" />}
               Looking for
             </p>
@@ -98,7 +98,7 @@ export default async function TrackRequestPage({
             </p>
           </div>
           <div className="rounded-2xl border border-ink-900/10 bg-white p-4">
-            <p className="text-[11px] font-semibold uppercase tracking-wide text-ink-400">Budget</p>
+            <p className="text-[12px] font-semibold uppercase tracking-wide text-ink-400">Budget</p>
             <p className="mt-1 text-sm font-semibold text-ink-800">
               {request.budget_min ? `${formatKes(request.budget_min)} – ` : "Up to "}
               {formatKes(request.budget_max)}
@@ -106,7 +106,7 @@ export default async function TrackRequestPage({
             <p className="mt-0.5 text-xs text-ink-500">per month</p>
           </div>
           <div className="rounded-2xl border border-ink-900/10 bg-white p-4">
-            <p className="text-[11px] font-semibold uppercase tracking-wide text-ink-400">Genuine matches</p>
+            <p className="text-[12px] font-semibold uppercase tracking-wide text-ink-400">Genuine matches</p>
             <p className="mt-1 font-display text-2xl font-bold text-teal-700">{request.match_count}</p>
             <p className="mt-0.5 text-xs text-ink-500">shared with you</p>
           </div>
@@ -208,7 +208,7 @@ export default async function TrackRequestPage({
                 <li key={`${message.created_at}-${index}`} className="rounded-2xl border border-ink-900/10 bg-white p-4">
                   <div className="flex items-center justify-between gap-2">
                     <p className="text-xs font-bold text-ink-700">{message.sender_name}</p>
-                    <p className="text-[11px] text-ink-400">{formatDateTime(message.created_at)}</p>
+                    <p className="text-[12px] text-ink-400">{formatDateTime(message.created_at)}</p>
                   </div>
                   <p className="mt-1.5 whitespace-pre-line text-sm leading-6 text-ink-600">{message.body}</p>
                 </li>

@@ -44,7 +44,7 @@ const RESOURCE_TYPES = [
 function JsonBlock({ value }: { value: Record<string, unknown> | null }) {
   if (!value) return <p className="text-xs text-ink-400">Not recorded</p>;
   return (
-    <pre className="max-h-64 overflow-auto rounded-lg bg-ink-900 px-3 py-2 text-[11px] leading-5 text-ivory-100">
+    <pre className="max-h-64 overflow-auto rounded-lg bg-ink-900 px-3 py-2 text-[12px] leading-5 text-ivory-100">
       {JSON.stringify(value, null, 2)}
     </pre>
   );
@@ -168,7 +168,7 @@ export default function AdminAuditLogsPage() {
             <table className="w-full min-w-[820px] border-collapse text-left text-sm">
               <caption className="sr-only">Audited platform actions</caption>
               <thead>
-                <tr className="border-b border-ink-900/10 bg-ivory-100 text-[11px] uppercase tracking-wide text-ink-500">
+                <tr className="border-b border-ink-900/10 bg-ivory-100 text-[12px] uppercase tracking-wide text-ink-500">
                   <th scope="col" className="px-4 py-3 font-semibold">Action</th>
                   <th scope="col" className="px-4 py-3 font-semibold">Resource</th>
                   <th scope="col" className="px-4 py-3 font-semibold">Actor</th>
@@ -185,7 +185,7 @@ export default function AdminAuditLogsPage() {
                     </td>
                     <td className="px-4 py-3 text-xs text-ink-600">
                       {titleize(log.resource_type)}
-                      <span className="mt-0.5 block max-w-[190px] truncate font-mono text-[10px] text-ink-400">
+                      <span className="mt-0.5 block max-w-[190px] truncate font-mono text-[11px] text-ink-400">
                         {log.resource_id}
                       </span>
                     </td>
@@ -252,39 +252,39 @@ export default function AdminAuditLogsPage() {
           <div className="space-y-4">
             <dl className="grid gap-2 sm:grid-cols-2">
               <div className="rounded-xl bg-ivory-100 p-3">
-                <dt className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Actor</dt>
+                <dt className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Actor</dt>
                 <dd className="mt-1 text-sm font-medium text-ink-800">
                   {selected.actor_name ?? "System"}
                   {selected.actor_id ? (
-                    <span className="mt-0.5 block break-all font-mono text-[10px] text-ink-400">{selected.actor_id}</span>
+                    <span className="mt-0.5 block break-all font-mono text-[11px] text-ink-400">{selected.actor_id}</span>
                   ) : null}
                 </dd>
               </div>
               <div className="rounded-xl bg-ivory-100 p-3">
-                <dt className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Resource</dt>
+                <dt className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Resource</dt>
                 <dd className="mt-1 text-sm font-medium text-ink-800">
                   {titleize(selected.resource_type)}
-                  <span className="mt-0.5 block break-all font-mono text-[10px] text-ink-400">{selected.resource_id}</span>
+                  <span className="mt-0.5 block break-all font-mono text-[11px] text-ink-400">{selected.resource_id}</span>
                 </dd>
               </div>
               <div className="rounded-xl bg-ivory-100 p-3">
-                <dt className="text-[10px] font-bold uppercase tracking-wide text-ink-400">IP address</dt>
+                <dt className="text-[11px] font-bold uppercase tracking-wide text-ink-400">IP address</dt>
                 <dd className="mt-1 text-sm font-medium text-ink-800">{selected.ip_address ?? "Not recorded"}</dd>
               </div>
               <div className="rounded-xl bg-ivory-100 p-3">
-                <dt className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Recorded</dt>
+                <dt className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Recorded</dt>
                 <dd className="mt-1 text-sm font-medium text-ink-800">{formatDateTime(selected.created_at)}</dd>
               </div>
             </dl>
 
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Before</p>
+              <p className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Before</p>
               <div className="mt-1">
                 <JsonBlock value={selected.before} />
               </div>
             </div>
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-wide text-ink-400">After</p>
+              <p className="text-[11px] font-bold uppercase tracking-wide text-ink-400">After</p>
               <div className="mt-1">
                 <JsonBlock value={selected.after} />
               </div>

@@ -405,7 +405,7 @@ export function SearchFilters({
           <SlidersHorizontal className="h-4 w-4" aria-hidden="true" />
           Filters
           {activeCount > 0 ? (
-            <span className="ml-1 rounded-full bg-teal-700 px-1.5 py-0.5 text-[10px] font-bold text-white">
+            <span className="ml-1 rounded-full bg-teal-700 px-1.5 py-0.5 text-[11px] font-bold text-white">
               {activeCount}
             </span>
           ) : null}

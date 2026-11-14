@@ -158,7 +158,7 @@ export function LoginForm({ next }: { next: string | null }) {
                 setPhone(account.phone);
                 setPassword(account.password);
               }}
-              className="rounded-lg border border-ink-900/10 bg-white px-2.5 py-1.5 text-[11px] font-semibold text-ink-600 transition hover:border-teal-600/40 hover:text-teal-700"
+              className="rounded-lg border border-ink-900/10 bg-white px-2.5 py-1.5 text-[12px] font-semibold text-ink-600 transition hover:border-teal-600/40 hover:text-teal-700"
             >
               {account.label}
             </button>

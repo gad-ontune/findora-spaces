@@ -131,7 +131,7 @@ export default async function HomePage() {
               <h1 className="max-w-2xl text-balance font-display text-3xl font-extrabold leading-[1.12] tracking-tight sm:text-4xl lg:text-[3.25rem]">
                 {home.hero.headline}
               </h1>
-              <p className="mt-4 max-w-xl text-[15px] leading-7 text-teal-100/85 sm:text-base">
+              <p className="mt-4 max-w-xl text-[16px] leading-7 text-teal-100/85 sm:text-base">
                 {home.hero.subheadline}
               </p>
               <div className="mt-6 max-w-2xl">
@@ -183,7 +183,7 @@ export default async function HomePage() {
                         <CheckCircle2 className="h-3 w-3" aria-hidden="true" />
                         Available now
                       </Badge>
-                      <span className="text-[11px] font-semibold text-ink-400">
+                      <span className="text-[12px] font-semibold text-ink-400">
                         {heroProperty.verification.verified_count} checks completed
                       </span>
                     </div>
@@ -210,7 +210,7 @@ export default async function HomePage() {
                     <CalendarCheck2 className="h-4 w-4 text-teal-600" aria-hidden="true" />
                     Availability reconfirmed
                   </p>
-                  <p className="mt-0.5 pl-6 text-[11px] text-ink-400">Freshness is visible on every listing.</p>
+                  <p className="mt-0.5 pl-6 text-[12px] text-ink-400">Freshness is visible on every listing.</p>
                 </div>
               </div>
             ) : null}
@@ -327,7 +327,7 @@ export default async function HomePage() {
                   </div>
                   <div className="text-right">
                     <p className="font-display text-lg font-bold text-teal-700">{location.property_count}</p>
-                    <p className="text-[10px] uppercase tracking-wide text-ink-400">available</p>
+                    <p className="text-[11px] uppercase tracking-wide text-ink-400">available</p>
                   </div>
                 </Link>
               ))}
@@ -438,7 +438,7 @@ export default async function HomePage() {
                 </span>
                 <div>
                   <p className="text-sm font-bold text-ink-900">Property Passport</p>
-                  <p className="text-[11px] text-ink-400">Sample structure · every item is evidence-backed</p>
+                  <p className="text-[12px] text-ink-400">Sample structure · every item is evidence-backed</p>
                 </div>
               </div>
               <Badge tone="green">Strong</Badge>

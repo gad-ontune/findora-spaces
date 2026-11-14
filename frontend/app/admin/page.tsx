@@ -246,7 +246,7 @@ export default function AdminDashboardPage() {
                       className="rounded-lg border border-ink-900/10 px-3 py-2"
                     >
                       <p className="text-xs font-semibold text-ink-800">{titleize(log.action.replace(/\./g, " "))}</p>
-                      <p className="mt-0.5 text-[11px] text-ink-400">
+                      <p className="mt-0.5 text-[12px] text-ink-400">
                         {log.resource_type} · {formatDateTime(log.created_at)}
                         {log.actor_id ? ` · actor ${log.actor_id.slice(0, 8)}` : " · system"}
                       </p>

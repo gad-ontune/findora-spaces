@@ -78,7 +78,7 @@ export function PropertyReviewModal({
 
           <div className="grid gap-3 sm:grid-cols-2">
             <div className="rounded-xl bg-ivory-100 p-3.5">
-              <p className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Location</p>
+              <p className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Location</p>
               <p className="mt-1 flex items-start gap-1.5 text-sm font-medium text-ink-800">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-teal-600" aria-hidden="true" />
                 {[property.location.neighbourhood, property.location.town, property.location.county]
@@ -90,7 +90,7 @@ export function PropertyReviewModal({
               ) : null}
             </div>
             <div className="rounded-xl bg-ivory-100 p-3.5">
-              <p className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Advertised rent</p>
+              <p className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Advertised rent</p>
               <p className="mt-1 text-sm font-bold text-ink-900">
                 {formatKes(property.rent_amount)} / {property.rent_period}
               </p>
@@ -101,7 +101,7 @@ export function PropertyReviewModal({
           </div>
 
           <div>
-            <p className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Description</p>
+            <p className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Description</p>
             <p className="mt-1 whitespace-pre-line rounded-xl border border-ink-900/10 px-3.5 py-3 text-sm leading-6 text-ink-600">
               {property.description}
             </p>
@@ -109,7 +109,7 @@ export function PropertyReviewModal({
 
           <div className="grid gap-3 sm:grid-cols-2">
             <div className="rounded-xl border border-ink-900/10 p-3.5">
-              <p className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wide text-ink-400">
+              <p className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wide text-ink-400">
                 <CalendarClock className="h-3.5 w-3.5" aria-hidden="true" />
                 Availability and listing record
               </p>
@@ -129,7 +129,7 @@ export function PropertyReviewModal({
               </p>
             </div>
             <div className="rounded-xl border border-ink-900/10 p-3.5">
-              <p className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wide text-ink-400">
+              <p className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wide text-ink-400">
                 <ImageIcon className="h-3.5 w-3.5" aria-hidden="true" />
                 Media and amenities
               </p>
@@ -149,7 +149,7 @@ export function PropertyReviewModal({
 
           {property.media.length ? (
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Photos</p>
+              <p className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Photos</p>
               <ul className="mt-1.5 grid grid-cols-3 gap-2 sm:grid-cols-4">
                 {property.media.slice(0, 8).map((item) => (
                   <li key={item.id} className="overflow-hidden rounded-lg border border-ink-900/10 bg-ivory-200">
@@ -157,7 +157,7 @@ export function PropertyReviewModal({
                       // eslint-disable-next-line @next/next/no-img-element
                       <img src={item.url} alt={item.caption ?? "Listing media"} className="aspect-[4/3] w-full object-cover" loading="lazy" />
                     ) : (
-                      <span className="flex aspect-[4/3] items-center justify-center text-[10px] font-semibold text-ink-400">
+                      <span className="flex aspect-[4/3] items-center justify-center text-[11px] font-semibold text-ink-400">
                         Video
                       </span>
                     )}
@@ -186,14 +186,14 @@ export function PropertyReviewModal({
                   </li>
                 ))}
               </ul>
-              <p className="mt-2 text-[11px] leading-5 text-ink-500">
+              <p className="mt-2 text-[12px] leading-5 text-ink-500">
                 Duplicate signals are not proof. Compare the records before approving.
               </p>
             </div>
           ) : null}
 
           <div>
-            <p className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Verification checks</p>
+            <p className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Verification checks</p>
             {property.verification.checks.length ? (
               <ul className="mt-1.5 grid gap-1.5 sm:grid-cols-2">
                 {property.verification.checks.map((check) => (

@@ -149,7 +149,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
 
             {hostNav.length ? (
               <div className="mt-5">
-                <p className="px-3 pb-1.5 text-[11px] font-bold uppercase tracking-[0.14em] text-ink-400">
+                <p className="px-3 pb-1.5 text-[12px] font-bold uppercase tracking-[0.14em] text-ink-400">
                   Property tools
                 </p>
                 <nav className="space-y-1" aria-label="Landlord navigation">
@@ -162,7 +162,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
 
             {isPartner || isStaff ? (
               <div className="mt-5">
-                <p className="px-3 pb-1.5 text-[11px] font-bold uppercase tracking-[0.14em] text-ink-400">
+                <p className="px-3 pb-1.5 text-[12px] font-bold uppercase tracking-[0.14em] text-ink-400">
                   Workspaces
                 </p>
                 <nav className="space-y-1" aria-label="Workspace navigation">
@@ -193,7 +193,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
             ) : null}
           </div>
 
-          <p className="mt-3 px-2 text-[11px] leading-5 text-ink-400">
+          <p className="mt-3 px-2 text-[12px] leading-5 text-ink-400">
             Demo environment. All listings, payments and verification records are fictional.
           </p>
         </aside>

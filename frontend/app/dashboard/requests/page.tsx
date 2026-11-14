@@ -129,15 +129,15 @@ function RequestRow({ request }: { request: SearchRequest }) {
 
       <dl className="mt-3 grid grid-cols-3 gap-2 rounded-xl bg-ivory-100 px-3 py-2.5 text-center">
         <div>
-          <dt className="text-[10px] font-semibold uppercase tracking-wide text-ink-400">Matches shared</dt>
+          <dt className="text-[11px] font-semibold uppercase tracking-wide text-ink-400">Matches shared</dt>
           <dd className="mt-0.5 font-display text-lg font-bold text-teal-700">{request.match_count}</dd>
         </div>
         <div>
-          <dt className="text-[10px] font-semibold uppercase tracking-wide text-ink-400">Local partners</dt>
+          <dt className="text-[11px] font-semibold uppercase tracking-wide text-ink-400">Local partners</dt>
           <dd className="mt-0.5 font-display text-lg font-bold text-ink-800">{request.assignment_count}</dd>
         </div>
         <div>
-          <dt className="text-[10px] font-semibold uppercase tracking-wide text-ink-400">Messages</dt>
+          <dt className="text-[11px] font-semibold uppercase tracking-wide text-ink-400">Messages</dt>
           <dd className="mt-0.5 font-display text-lg font-bold text-ink-800">{request.messages.length}</dd>
         </div>
       </dl>

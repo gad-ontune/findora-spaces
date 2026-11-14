@@ -241,7 +241,7 @@ export default function AdminFinancePage() {
                 <table className="w-full min-w-[900px] border-collapse text-left text-sm">
                   <caption className="sr-only">Payment records with provider status</caption>
                   <thead>
-                    <tr className="border-b border-ink-900/10 bg-ivory-100 text-[11px] uppercase tracking-wide text-ink-500">
+                    <tr className="border-b border-ink-900/10 bg-ivory-100 text-[12px] uppercase tracking-wide text-ink-500">
                       <th scope="col" className="px-4 py-3 font-semibold">Reference</th>
                       <th scope="col" className="px-4 py-3 font-semibold">Purpose</th>
                       <th scope="col" className="px-4 py-3 font-semibold">Amount</th>
@@ -256,27 +256,27 @@ export default function AdminFinancePage() {
                       <tr key={payment.id} className="border-b border-ink-900/5 last:border-0 hover:bg-ivory-50">
                         <td className="px-4 py-3">
                           <p className="font-semibold text-ink-800">{payment.reference}</p>
-                          <p className="text-[11px] text-ink-400">{payment.phone ?? "No phone recorded"}</p>
+                          <p className="text-[12px] text-ink-400">{payment.phone ?? "No phone recorded"}</p>
                         </td>
                         <td className="px-4 py-3 text-xs text-ink-600">
                           {titleize(payment.purpose)}
                           {payment.description ? (
-                            <span className="mt-0.5 block text-[11px] text-ink-400">{payment.description}</span>
+                            <span className="mt-0.5 block text-[12px] text-ink-400">{payment.description}</span>
                           ) : null}
                         </td>
                         <td className="px-4 py-3 text-xs font-semibold text-ink-800">
                           {formatKes(payment.amount)}
-                          <span className="mt-0.5 block text-[11px] font-normal text-ink-400">{payment.currency}</span>
+                          <span className="mt-0.5 block text-[12px] font-normal text-ink-400">{payment.currency}</span>
                         </td>
                         <td className="px-4 py-3">
                           <StatusBadge status={payment.status} />
                           {payment.failure_reason ? (
-                            <p className="mt-1 max-w-[180px] text-[10px] leading-4 text-terracotta-700">{payment.failure_reason}</p>
+                            <p className="mt-1 max-w-[180px] text-[11px] leading-4 text-terracotta-700">{payment.failure_reason}</p>
                           ) : null}
                         </td>
                         <td className="px-4 py-3 text-xs text-ink-600">
                           {titleize(payment.provider)}
-                          <span className="mt-0.5 block max-w-[150px] truncate text-[11px] text-ink-400">
+                          <span className="mt-0.5 block max-w-[150px] truncate text-[12px] text-ink-400">
                             {payment.provider_reference ?? "No provider reference"}
                           </span>
                         </td>
@@ -328,7 +328,7 @@ export default function AdminFinancePage() {
                     <StatusBadge status={refund.status} />
                   </div>
                   <p className="mt-2 rounded-lg bg-ivory-100 px-3 py-2 text-xs leading-5 text-ink-600">{refund.reason}</p>
-                  <p className="mt-1 text-[11px] text-ink-400">
+                  <p className="mt-1 text-[12px] text-ink-400">
                     Provider reference: {refund.provider_reference ?? "not recorded"}
                   </p>
                 </article>
@@ -403,15 +403,15 @@ export default function AdminFinancePage() {
                 </div>
                 <dl className="mt-3 grid gap-2 sm:grid-cols-3">
                   <div className="rounded-xl bg-ivory-100 p-3">
-                    <dt className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Date</dt>
+                    <dt className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Date</dt>
                     <dd className="mt-1 text-sm font-semibold text-ink-800">{formatDate(reconciliationResult.date)}</dd>
                   </div>
                   <div className="rounded-xl bg-ivory-100 p-3">
-                    <dt className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Provider</dt>
+                    <dt className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Provider</dt>
                     <dd className="mt-1 text-sm font-semibold text-ink-800">{formatKes(reconciliationResult.provider_total)}</dd>
                   </div>
                   <div className="rounded-xl bg-ivory-100 p-3">
-                    <dt className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Internal</dt>
+                    <dt className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Internal</dt>
                     <dd className="mt-1 text-sm font-semibold text-ink-800">{formatKes(reconciliationResult.internal_total)}</dd>
                   </div>
                 </dl>

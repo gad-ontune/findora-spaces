@@ -213,14 +213,14 @@ export default function AdminFieldReportsPage() {
 
               <dl className="mt-2 grid gap-2 text-xs sm:grid-cols-3">
                 <div className="rounded-lg border border-ink-900/10 px-2.5 py-2">
-                  <dt className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Contact recorded</dt>
+                  <dt className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Contact recorded</dt>
                   <dd className="mt-0.5 font-medium text-ink-700">
                     {report.contact_name ?? "Not recorded"}
                     {report.contact_phone ? ` · ${report.contact_phone}` : ""}
                   </dd>
                 </div>
                 <div className="rounded-lg border border-ink-900/10 px-2.5 py-2">
-                  <dt className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Findings</dt>
+                  <dt className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Findings</dt>
                   <dd className="mt-0.5 font-medium text-ink-700">
                     {Object.keys(report.findings).length
                       ? Object.keys(report.findings).map((key) => titleize(key)).join(", ")
@@ -228,7 +228,7 @@ export default function AdminFieldReportsPage() {
                   </dd>
                 </div>
                 <div className="rounded-lg border border-ink-900/10 px-2.5 py-2">
-                  <dt className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Reviewed</dt>
+                  <dt className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Reviewed</dt>
                   <dd className="mt-0.5 font-medium text-ink-700">
                     {report.reviewed_at ? formatDateTime(report.reviewed_at) : "Not yet reviewed"}
                   </dd>
@@ -272,7 +272,7 @@ export default function AdminFieldReportsPage() {
             </div>
 
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Summary</p>
+              <p className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Summary</p>
               <p className="mt-1 whitespace-pre-line rounded-xl border border-ink-900/10 px-3.5 py-3 text-sm leading-6 text-ink-600">
                 {selected.summary}
               </p>
@@ -280,7 +280,7 @@ export default function AdminFieldReportsPage() {
 
             {Object.keys(selected.findings).length ? (
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Structured findings</p>
+                <p className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Structured findings</p>
                 <dl className="mt-1.5 space-y-1.5">
                   {Object.entries(selected.findings).map(([key, value]) => (
                     <div key={key} className="flex flex-wrap gap-x-2 rounded-lg bg-ivory-100 px-2.5 py-1.5 text-xs">
@@ -296,7 +296,7 @@ export default function AdminFieldReportsPage() {
 
             {selected.photos.length ? (
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Photos</p>
+                <p className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Photos</p>
                 <ul className="mt-1.5 grid grid-cols-3 gap-2">
                   {selected.photos.map((photo, index) => (
                     <li key={`${photo}-${index}`} className="overflow-hidden rounded-lg border border-ink-900/10 bg-ivory-200">

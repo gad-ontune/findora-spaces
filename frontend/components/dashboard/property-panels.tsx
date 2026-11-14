@@ -92,7 +92,7 @@ export function AvailabilityPanel({ property }: { property: PropertyDetail }) {
     <div className="space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl bg-ivory-100 p-4">
         <div>
-          <p className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Public availability</p>
+          <p className="text-[12px] font-bold uppercase tracking-wide text-ink-400">Public availability</p>
           <div className="mt-1 flex flex-wrap items-center gap-2">
             <StatusBadge
               status={property.availability_status}
@@ -248,7 +248,7 @@ export function VerificationPanel({ property }: { property: PropertyDetail }) {
               <StatusBadge status={check.status} />
             </div>
             {check.summary ? <p className="mt-1 text-xs leading-5 text-ink-500">{check.summary}</p> : null}
-            <p className="mt-1 text-[11px] text-ink-400">
+            <p className="mt-1 text-[12px] text-ink-400">
               {check.verified_at ? `Verified ${formatDateTime(check.verified_at)}` : "Not yet verified"}
               {check.expires_at ? ` · expires ${formatDateTime(check.expires_at)}` : ""}
             </p>
@@ -285,7 +285,7 @@ export function VerificationPanel({ property }: { property: PropertyDetail }) {
                   </p>
                 ) : null}
                 {record.evidence.length ? (
-                  <p className="mt-1 flex items-center gap-1.5 text-[11px] text-ink-400">
+                  <p className="mt-1 flex items-center gap-1.5 text-[12px] text-ink-400">
                     <CheckCircle2 className="h-3 w-3" aria-hidden="true" />
                     {record.evidence.length} evidence item{record.evidence.length === 1 ? "" : "s"} recorded
                   </p>

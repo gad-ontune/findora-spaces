@@ -177,7 +177,7 @@ export default function AdminViewingsPage() {
 
                 {feedback ? (
                   <div className="mt-2 rounded-lg bg-ivory-100 px-3 py-2">
-                    <p className="text-[10px] font-bold uppercase tracking-wide text-ink-400">
+                    <p className="text-[11px] font-bold uppercase tracking-wide text-ink-400">
                       Seeker feedback · {formatDateTime(feedback.created_at)}
                     </p>
                     <div className="mt-1 flex flex-wrap gap-1.5">
@@ -228,14 +228,14 @@ export default function AdminViewingsPage() {
 
             <dl className="grid gap-2 sm:grid-cols-2">
               <div className="rounded-xl bg-ivory-100 p-3">
-                <dt className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Seeker</dt>
+                <dt className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Seeker</dt>
                 <dd className="mt-1 text-sm font-medium text-ink-800">
                   {selected.seeker_name}
                   <span className="block text-xs text-ink-500">{selected.seeker_phone}</span>
                 </dd>
               </div>
               <div className="rounded-xl bg-ivory-100 p-3">
-                <dt className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Property</dt>
+                <dt className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Property</dt>
                 <dd className="mt-1 text-sm font-medium text-ink-800">
                   {selected.property?.title ?? "Not recorded"}
                   {selected.property ? (
@@ -249,7 +249,7 @@ export default function AdminViewingsPage() {
                 </dd>
               </div>
               <div className="rounded-xl bg-ivory-100 p-3">
-                <dt className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Timing</dt>
+                <dt className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Timing</dt>
                 <dd className="mt-1 text-sm font-medium text-ink-800">
                   {selected.scheduled_at
                     ? formatDateTime(selected.scheduled_at)
@@ -259,14 +259,14 @@ export default function AdminViewingsPage() {
                 </dd>
               </div>
               <div className="rounded-xl bg-ivory-100 p-3">
-                <dt className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Meeting point</dt>
+                <dt className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Meeting point</dt>
                 <dd className="mt-1 text-sm font-medium text-ink-800">{selected.meeting_point ?? "Not recorded"}</dd>
               </div>
             </dl>
 
             {selected.notes ? (
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Seeker notes</p>
+                <p className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Seeker notes</p>
                 <p className="mt-1 whitespace-pre-line rounded-xl border border-ink-900/10 px-3.5 py-3 text-sm leading-6 text-ink-600">
                   {selected.notes}
                 </p>
@@ -280,7 +280,7 @@ export default function AdminViewingsPage() {
             ) : null}
 
             <div>
-              <p className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wide text-ink-400">
+              <p className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wide text-ink-400">
                 <MessageSquare className="h-3.5 w-3.5" aria-hidden="true" />
                 Feedback
               </p>
@@ -311,7 +311,7 @@ export default function AdminViewingsPage() {
                       {feedback.comments ? (
                         <p className="mt-1.5 whitespace-pre-line text-xs leading-5 text-ink-600">{feedback.comments}</p>
                       ) : null}
-                      <p className="mt-1 text-[10px] text-ink-400">Recorded {formatDateTime(feedback.created_at)}</p>
+                      <p className="mt-1 text-[11px] text-ink-400">Recorded {formatDateTime(feedback.created_at)}</p>
                     </li>
                   ))}
                 </ul>
@@ -322,7 +322,7 @@ export default function AdminViewingsPage() {
 
             {selected.status_history.length ? (
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-wide text-ink-400">Status history</p>
+                <p className="text-[11px] font-bold uppercase tracking-wide text-ink-400">Status history</p>
                 <ol className="mt-1.5 space-y-1.5">
                   {selected.status_history.map((entry, index) => (
                     <li key={`${entry.to}-${entry.created_at}-${index}`} className="border-l-2 border-teal-200 pl-3">
@@ -330,8 +330,8 @@ export default function AdminViewingsPage() {
                         {entry.from ? `${titleize(entry.from)} → ` : ""}
                         {titleize(entry.to)}
                       </p>
-                      <p className="text-[10px] text-ink-400">{formatDateTime(entry.created_at)}</p>
-                      {entry.notes ? <p className="text-[11px] leading-5 text-ink-500">{entry.notes}</p> : null}
+                      <p className="text-[11px] text-ink-400">{formatDateTime(entry.created_at)}</p>
+                      {entry.notes ? <p className="text-[12px] leading-5 text-ink-500">{entry.notes}</p> : null}
                     </li>
                   ))}
                 </ol>

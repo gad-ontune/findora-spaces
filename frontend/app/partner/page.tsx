@@ -392,7 +392,7 @@ export default function PartnerOverviewPage() {
                         <p className="mt-2 line-clamp-2 text-xs leading-5 text-ink-500">{assignment.instructions}</p>
                       ) : null}
                       <div className="mt-2 flex items-center justify-between gap-2">
-                        <p className="text-[11px] text-ink-400">
+                        <p className="text-[12px] text-ink-400">
                           Offered {formatDate(assignment.created_at)}
                           {assignment.due_at ? ` · due ${formatDate(assignment.due_at)}` : ""}
                         </p>
@@ -473,12 +473,12 @@ export default function PartnerOverviewPage() {
                       { label: "Reviewed", value: performance.reviewed_reports },
                     ].map((item) => (
                       <div key={item.label} className="rounded-xl bg-ivory-100 px-2 py-2.5">
-                        <dt className="text-[10px] font-semibold uppercase tracking-wide text-ink-400">{item.label}</dt>
+                        <dt className="text-[11px] font-semibold uppercase tracking-wide text-ink-400">{item.label}</dt>
                         <dd className="mt-0.5 font-display text-lg font-bold text-ink-900">{item.value}</dd>
                       </div>
                     ))}
                   </dl>
-                  <p className="mt-2 text-[11px] leading-5 text-ink-400">{performanceQuery.data?.note}</p>
+                  <p className="mt-2 text-[12px] leading-5 text-ink-400">{performanceQuery.data?.note}</p>
                 </section>
               ) : null}
             </aside>

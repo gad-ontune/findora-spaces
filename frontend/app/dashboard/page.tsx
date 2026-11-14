@@ -253,7 +253,7 @@ export default function DashboardOverviewPage() {
                           {request.category === "commercial" ? "Commercial" : "Residential"} ·{" "}
                           {request.town ?? "Any town"} · up to {formatKes(request.budget_max)}
                         </p>
-                        <p className="mt-1 text-[11px] text-ink-400">
+                        <p className="mt-1 text-[12px] text-ink-400">
                           {request.match_count} genuine match{request.match_count === 1 ? "" : "es"} shared
                         </p>
                       </div>
@@ -303,7 +303,7 @@ export default function DashboardOverviewPage() {
                     <p className="text-sm font-semibold text-ink-800">{notification.title}</p>
                     <p className="mt-0.5 line-clamp-2 text-xs leading-5 text-ink-500">{notification.body}</p>
                   </div>
-                  <span className="shrink-0 text-[11px] text-ink-400">{formatDateTime(notification.created_at)}</span>
+                  <span className="shrink-0 text-[12px] text-ink-400">{formatDateTime(notification.created_at)}</span>
                 </li>
               ))}
             </ul>

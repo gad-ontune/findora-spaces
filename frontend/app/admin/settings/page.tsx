@@ -213,7 +213,7 @@ export default function AdminSettingsPage() {
                   Edit
                 </Button>
               </div>
-              <pre className="mt-2 max-h-48 overflow-auto rounded-lg bg-ivory-100 px-3 py-2 text-[11px] leading-5 text-ink-700">
+              <pre className="mt-2 max-h-48 overflow-auto rounded-lg bg-ivory-100 px-3 py-2 text-[12px] leading-5 text-ink-700">
                 {pretty(setting.value)}
               </pre>
             </article>
