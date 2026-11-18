@@ -78,6 +78,32 @@ test.describe("authentication and role landing", () => {
   });
 });
 
+test.describe("signed-in experience", () => {
+  test("signed-in accounts see workspace shortcuts instead of visitor prompts", async ({ page }) => {
+    await signIn(page, "+254700000002", "Landlord123!");
+
+    await page.goto("/");
+    await expect(page.getByText(/Signed in as/)).toBeVisible();
+    await expect(page.getByRole("link", { name: "Dashboard" }).first()).toBeVisible();
+    await expect(page.locator("footer")).toHaveCount(0);
+    await expect(page.getByRole("link", { name: "Create a landlord account" })).toHaveCount(0);
+
+    await page.goto("/landlord");
+    await expect(page.getByRole("link", { name: "Go to your workspace" })).toBeVisible();
+    await expect(page.getByRole("link", { name: "Review this plan" }).first()).toBeVisible();
+    await expect(page.getByRole("link", { name: "Create a landlord account" })).toHaveCount(0);
+    await expect(page.locator("footer")).toHaveCount(0);
+  });
+
+  test("guests still see the public footer and landlord sign-up prompt", async ({ page }) => {
+    await page.goto("/");
+
+    await expect(page.getByText(/Signed in as/)).toHaveCount(0);
+    await expect(page.locator("footer")).toBeVisible();
+    await expect(page.getByRole("link", { name: "Create a landlord account" }).first()).toBeVisible();
+  });
+});
+
 test.describe("property location pinning", () => {
   test("a landlord can pin the exact property location with the device GPS", async ({ page, context }) => {
     await context.grantPermissions(["geolocation"]);

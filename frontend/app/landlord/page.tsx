@@ -9,11 +9,14 @@ import {
   Handshake,
   LineChart,
   ShieldCheck,
-  Sparkles,
   Wallet,
 } from "lucide-react";
 
-import { LinkButton } from "@/components/ui/button";
+import {
+  LandlordFinalCta,
+  LandlordHeaderActions,
+  LandlordPlanAction,
+} from "@/components/landlord/actions";
 import { PageHeader } from "@/components/ui/page";
 import { serverFetch } from "@/lib/server-api";
 import type { SubscriptionPlan } from "@/lib/types";
@@ -39,17 +42,7 @@ export default async function LandlordPage() {
         eyebrow="For landlords and property managers"
         title="Fill your space with serious seekers"
         description="Findora shows approved, freshly confirmed listings with a transparent Property Passport. You keep control of availability, enquiries and viewings."
-        actions={
-          <>
-            <LinkButton href="/register?type=landlord">
-              Create a landlord account
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </LinkButton>
-            <LinkButton href="/login" variant="outline">
-              Sign in
-            </LinkButton>
-          </>
-        }
+        actions={<LandlordHeaderActions />}
       />
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -185,9 +178,7 @@ export default async function LandlordPage() {
                   {plan.listing_limit ? `Up to ${plan.listing_limit} active listings` : "Listing limit set by agreement"}
                 </li>
               </ul>
-              <LinkButton href="/register?type=landlord" variant={plan.code === "growth" ? "primary" : "outline"} className="mt-4 w-full">
-                Get started
-              </LinkButton>
+              <LandlordPlanAction highlighted={plan.code === "growth"} />
             </div>
           ))}
           {plans.length === 0 ? (
@@ -239,25 +230,7 @@ export default async function LandlordPage() {
             ))}
           </div>
         </div>
-        <div className="rounded-3xl bg-teal-800 p-6 text-ivory-50 sm:p-8">
-          <Sparkles className="h-6 w-6 text-sage-300" aria-hidden="true" />
-          <h2 className="mt-3 font-display text-2xl font-bold">Ready to list honestly?</h2>
-          <p className="mt-2 text-sm leading-6 text-teal-100/80">
-            Create an account, verify your phone and add your first property. You stay in control of availability and
-            enquiries, and every material change is recorded.
-          </p>
-          <div className="mt-5 flex flex-wrap gap-2">
-            <LinkButton href="/register?type=landlord" variant="secondary">
-              Create a landlord account
-            </LinkButton>
-            <LinkButton href="/trust" variant="outline" className="border-teal-500 bg-transparent text-ivory-50 hover:bg-teal-700 hover:text-white">
-              Read the trust guide
-            </LinkButton>
-          </div>
-          <p className="mt-4 text-xs text-teal-100/60">
-            Demo environment: all properties and accounts are fictional sample data.
-          </p>
-        </div>
+        <LandlordFinalCta />
       </section>
     </div>
   );

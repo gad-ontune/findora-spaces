@@ -21,7 +21,9 @@ import {
   FileSearch,
 } from "lucide-react";
 
+import { GuestOnly } from "@/components/auth/guest-only";
 import { HeroSearch } from "@/components/home/hero-search";
+import { SignedInHomeBanner } from "@/components/home/signed-in-banner";
 import { PropertyCard } from "@/components/property/property-card";
 import { LinkButton } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -96,6 +98,8 @@ export default async function HomePage() {
 
   return (
     <>
+      <SignedInHomeBanner />
+
       {/* Hero */}
       <section className="relative overflow-hidden bg-teal-900 text-ivory-50">
         <div
@@ -469,33 +473,35 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Landlord CTA */}
-      <section className="container-page pb-16">
-        <div className="relative overflow-hidden rounded-3xl bg-teal-800 px-6 py-10 text-ivory-50 sm:px-10">
-          <div
-            className="pointer-events-none absolute -right-16 -top-20 h-64 w-64 rounded-full bg-sage-400/20 blur-3xl"
-            aria-hidden="true"
-          />
-          <div className="relative flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-            <div>
-              <p className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-teal-700 px-3 py-1 text-xs font-semibold text-teal-100">
-                <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
-                For landlords and property managers
-              </p>
-              <h2 className="font-display text-2xl font-bold tracking-tight sm:text-3xl">{home.landlord_cta.title}</h2>
-              <p className="mt-2 max-w-xl text-sm leading-6 text-teal-100/80">{home.landlord_cta.description}</p>
-            </div>
-            <div className="flex shrink-0 flex-wrap gap-3">
-              <LinkButton href="/register?type=landlord" variant="secondary">
-                Create a landlord account
-              </LinkButton>
-              <LinkButton href="/landlord" variant="outline" className="border-teal-500 bg-transparent text-ivory-50 hover:bg-teal-700 hover:text-white">
-                Learn more
-              </LinkButton>
+      {/* Landlord CTA: visitor-only, signed-in accounts already have a workspace */}
+      <GuestOnly>
+        <section className="container-page pb-16">
+          <div className="relative overflow-hidden rounded-3xl bg-teal-800 px-6 py-10 text-ivory-50 sm:px-10">
+            <div
+              className="pointer-events-none absolute -right-16 -top-20 h-64 w-64 rounded-full bg-sage-400/20 blur-3xl"
+              aria-hidden="true"
+            />
+            <div className="relative flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+              <div>
+                <p className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-teal-700 px-3 py-1 text-xs font-semibold text-teal-100">
+                  <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
+                  For landlords and property managers
+                </p>
+                <h2 className="font-display text-2xl font-bold tracking-tight sm:text-3xl">{home.landlord_cta.title}</h2>
+                <p className="mt-2 max-w-xl text-sm leading-6 text-teal-100/80">{home.landlord_cta.description}</p>
+              </div>
+              <div className="flex shrink-0 flex-wrap gap-3">
+                <LinkButton href="/register?type=landlord" variant="secondary">
+                  Create a landlord account
+                </LinkButton>
+                <LinkButton href="/landlord" variant="outline" className="border-teal-500 bg-transparent text-ivory-50 hover:bg-teal-700 hover:text-white">
+                  Learn more
+                </LinkButton>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </GuestOnly>
     </>
   );
 }

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Manrope } from "next/font/google";
 
 import { Footer } from "@/components/layout/footer";
+import { FooterGate } from "@/components/layout/footer-gate";
 import { Header } from "@/components/layout/header";
 import { Providers } from "@/components/providers";
 import { ServiceWorkerRegistration } from "@/components/pwa";
@@ -72,7 +73,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <main id="main-content" className="min-h-[60vh]">
             {children}
           </main>
-          <Footer />
+          <FooterGate>
+            <Footer />
+          </FooterGate>
           <ServiceWorkerRegistration />
         </Providers>
       </body>

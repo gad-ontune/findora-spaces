@@ -64,7 +64,7 @@ export function PropertyCard({
             ) : null}
           </div>
           <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between gap-2">
-            <span className="rounded-lg bg-ink-900/80 px-2 py-1 text-[12px] font-semibold text-white backdrop-blur">
+            <span className="rounded-lg bg-ink-900/90 px-2.5 py-1 text-xs font-semibold text-white shadow-sm backdrop-blur">
               {confirmedDays === null
                 ? "Availability not confirmed"
                 : confirmedDays === 0
@@ -75,16 +75,16 @@ export function PropertyCard({
         </div>
       </Link>
 
-      <div className={cn("p-4", compact && "p-3.5")}>
-        <div className="flex items-start justify-between gap-3">
+      <div className={cn("p-4 sm:p-5", compact && "p-4")}>
+        <div className="flex flex-wrap items-start justify-between gap-2">
           <div className="min-w-0">
-            <p className="font-display text-lg font-bold tracking-tight text-ink-900">
+            <p className="font-display text-xl font-bold tracking-tight text-ink-900">
               {formatKes(property.rent_amount)}
-              <span className="ml-1 text-xs font-medium text-ink-400">
+              <span className="ml-1 text-sm font-medium text-ink-500">
                 /{property.rent_period === "monthly" ? "month" : titleize(property.rent_period)}
               </span>
             </p>
-            <p className="mt-0.5 text-xs text-ink-400">
+            <p className="mt-0.5 text-sm text-ink-500">
               {property.deposit_amount
                 ? `${formatKes(property.deposit_amount)} deposit`
                 : "Deposit not disclosed"}
@@ -95,28 +95,28 @@ export function PropertyCard({
           </Badge>
         </div>
 
-        <h3 className="mt-2.5 line-clamp-2 font-display text-[16px] font-semibold leading-6 text-ink-800">
+        <h3 className="mt-3 line-clamp-2 font-display text-lg font-bold leading-6 text-ink-900">
           <Link href={`/properties/${property.id}`} className="hover:text-teal-700">
             {property.title}
           </Link>
         </h3>
 
-        <p className="mt-1 flex items-center gap-1 text-xs text-ink-500">
-          <MapPin className="h-3.5 w-3.5 shrink-0 text-teal-600" aria-hidden="true" />
+        <p className="mt-1.5 flex items-center gap-1.5 text-sm text-ink-600">
+          <MapPin className="h-4 w-4 shrink-0 text-teal-700" aria-hidden="true" />
           <span className="truncate">{location || property.location.county}</span>
         </p>
 
-        <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1.5 border-t border-ink-900/10 pt-3 text-xs text-ink-500">
-          <span className="font-medium text-ink-700">{propertyTypeLabel(property.property_type)}</span>
+        <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1.5 border-t border-ink-900/10 pt-3 text-sm text-ink-600">
+          <span className="font-semibold text-ink-800">{propertyTypeLabel(property.property_type)}</span>
           {property.category === "residential" && property.bedrooms !== null ? (
             <span className="inline-flex items-center gap-1">
-              <BedDouble className="h-3.5 w-3.5" aria-hidden="true" />
+              <BedDouble className="h-4 w-4" aria-hidden="true" />
               {property.bedrooms} bed{property.bedrooms === 1 ? "" : "s"}
             </span>
           ) : null}
           {property.category === "residential" && property.bathrooms !== null ? (
             <span className="inline-flex items-center gap-1">
-              <Bath className="h-3.5 w-3.5" aria-hidden="true" />
+              <Bath className="h-4 w-4" aria-hidden="true" />
               {property.bathrooms} bath{property.bathrooms === 1 ? "" : "s"}
             </span>
           ) : null}
@@ -127,16 +127,16 @@ export function PropertyCard({
         <div className="mt-3 flex items-center justify-between gap-2">
           <span
             className={cn(
-              "inline-flex items-center gap-1 text-[12px] font-semibold",
+              "inline-flex items-center gap-1 text-sm font-semibold",
               property.availability_status === "available" && property.is_fresh
                 ? "text-teal-700"
-                : "text-sand-500",
+                : "text-ink-600",
             )}
           >
-            <CalendarCheck2 className="h-3.5 w-3.5" aria-hidden="true" />
+            <CalendarCheck2 className="h-4 w-4" aria-hidden="true" />
             {availabilityLabel(property.availability_status, property.is_fresh)}
           </span>
-          <span className="text-[12px] font-medium text-ink-400">
+          <span className="text-sm font-medium text-ink-500">
             {property.verification.verified_count}/{property.verification.checks.length || 8} checks
           </span>
         </div>
