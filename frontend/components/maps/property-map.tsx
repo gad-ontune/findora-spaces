@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { MapPinOff } from "lucide-react";
+import "maplibre-gl/dist/maplibre-gl.css";
 
 import { cn, formatKes } from "@/lib/utils";
 
@@ -37,6 +38,9 @@ export function PropertyMap({
   const markersRef = useRef<import("maplibre-gl").Marker[]>([]);
   const libRef = useRef<MapLibreModule | null>(null);
   const [failed, setFailed] = useState(false);
+  // Markers can arrive from the API before the async MapLibre import finishes.
+  // This re-runs the marker sync once the map instance actually exists.
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -63,6 +67,7 @@ export function PropertyMap({
           "bottom-right",
         );
         mapRef.current = map;
+        if (!cancelled) setReady(true);
 
         map.on("load", () => {
           if (!map) return;
@@ -137,6 +142,7 @@ export function PropertyMap({
       markersRef.current = [];
       map?.remove();
       mapRef.current = null;
+      setReady(false);
     };
     // The map is intentionally recreated only when the style changes.
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -174,7 +180,7 @@ export function PropertyMap({
     } else if (markers.length === 1 && !singleMarker) {
       map.easeTo({ center: [markers[0].longitude, markers[0].latitude], zoom: 14, duration: 300 });
     }
-  }, [markers, singleMarker]);
+  }, [markers, singleMarker, ready]);
 
   if (failed) {
     return (

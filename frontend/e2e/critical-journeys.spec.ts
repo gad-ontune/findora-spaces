@@ -35,6 +35,31 @@ test.describe("public discovery", () => {
   });
 });
 
+test.describe("map search", () => {
+  test("the map page renders tiles and listing pins", async ({ page }) => {
+    await page.goto("/map");
+
+    await expect(page.getByRole("heading", { name: "Explore spaces by area" })).toBeVisible();
+    await expect(page.getByText(/spaces match these filters/)).toBeVisible();
+
+    const map = page.getByRole("region", { name: /property map/i });
+    await expect(map).toBeVisible();
+    await expect(map.locator(".maplibregl-canvas")).toBeVisible();
+    await expect(page.locator(".maplibregl-marker").first()).toBeVisible();
+    await expect(page.getByText("The map could not load")).toHaveCount(0);
+  });
+
+  test("the search results map view renders pins", async ({ page }) => {
+    await page.goto("/properties");
+    await page.getByRole("button", { name: "Map", exact: true }).click();
+
+    const map = page.getByRole("region", { name: /property map/i });
+    await expect(map).toBeVisible();
+    await expect(map.locator(".maplibregl-canvas")).toBeVisible();
+    await expect(page.locator(".maplibregl-marker").first()).toBeVisible();
+  });
+});
+
 test.describe("authentication and role landing", () => {
   test("a seeker signs in and lands on their dashboard", async ({ page }) => {
     await signIn(page, "+254700000005", "Seeker123!");

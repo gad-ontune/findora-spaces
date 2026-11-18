@@ -25,7 +25,7 @@ export function MapExplorer({ config, towns }: { config: ConfigPayload | null; t
   const [showList, setShowList] = useState(true);
 
   const params = useMemo(() => {
-    const query: Record<string, string> = { page_size: "60", sort: "recently_confirmed" };
+    const query: Record<string, string> = { page_size: "60", sort: "freshness" };
     if (category) query.category = category;
     if (townId) query.town_id = townId;
     if (maxRent) query.max_rent = maxRent;
@@ -128,67 +128,69 @@ export function MapExplorer({ config, towns }: { config: ConfigPayload | null; t
         </div>
       </div>
 
-      {isError ? (
-        <ErrorState
-          title="Map search could not load"
-          description="We could not reach the live listing index. No cached or invented results are shown."
-          retry={() => refetch()}
-        />
-      ) : (
-        <div className="grid gap-5 lg:grid-cols-[1.2fr_1fr] lg:items-start">
-          <div className="lg:sticky lg:top-24">
-            <PropertyMap
-              markers={markers}
-              styleUrl={config?.map.style_url}
-              className="h-[380px] sm:h-[520px] lg:h-[calc(100vh-9rem)]"
-            />
-            <p className="mt-2 flex items-start gap-1.5 text-xs leading-5 text-ink-400">
-              <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-              Map pins are approximate areas, not exact addresses. Always confirm the location and view before paying.
-            </p>
-          </div>
-
-          <div className={cn(!showList && "hidden lg:block")}>
-            <div className="mb-3 flex items-center gap-2">
-              <Badge tone="teal">{formatNumber(data?.pagination.total ?? 0)} results</Badge>
-              <span className="text-xs text-ink-400">Newest availability confirmations first</span>
-            </div>
-            {isLoading ? (
-              <div className="space-y-3">
-                {Array.from({ length: 4 }).map((_, index) => (
-                  <Skeleton key={index} className="h-28 w-full" />
-                ))}
-              </div>
-            ) : data && data.items.length ? (
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
-                {data.items.map((property) => (
-                  <PropertyCard key={property.id} property={property} compact />
-                ))}
-              </div>
-            ) : (
-              <EmptyState
-                title="No spaces match this map search"
-                description="Adjust the filters or ask our team to look for you. We never place invented listings on the map."
-                icon={<SearchX className="h-6 w-6" aria-hidden="true" />}
-                action={
-                  <Button
-                    variant="outline"
-                    onClick={() => {
-                      setCategory("");
-                      setTownId("");
-                      setMaxRent("");
-                      setVerified("any");
-                      setQ("");
-                    }}
-                  >
-                    Clear filters
-                  </Button>
-                }
-              />
-            )}
-          </div>
+      <div className="grid gap-5 lg:grid-cols-[1.2fr_1fr] lg:items-start">
+        <div className="lg:sticky lg:top-24">
+          <PropertyMap
+            markers={markers}
+            styleUrl={config?.map.style_url}
+            className="h-[380px] sm:h-[520px] lg:h-[calc(100vh-9rem)]"
+          />
+          <p className="mt-2 flex items-start gap-1.5 text-xs leading-5 text-ink-400">
+            <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+            Map pins are approximate areas, not exact addresses. Always confirm the location and view before paying.
+          </p>
         </div>
-      )}
+
+        <div className={cn(!showList && "hidden lg:block")}>
+          {isError ? (
+            <ErrorState
+              title="Map search results could not load"
+              description="The map is still available, but we could not reach the live listing index. No cached or invented results are shown."
+              retry={() => refetch()}
+            />
+          ) : (
+            <>
+              <div className="mb-3 flex items-center gap-2">
+                <Badge tone="teal">{formatNumber(data?.pagination.total ?? 0)} results</Badge>
+                <span className="text-xs text-ink-400">Newest availability confirmations first</span>
+              </div>
+              {isLoading ? (
+                <div className="space-y-3">
+                  {Array.from({ length: 4 }).map((_, index) => (
+                    <Skeleton key={index} className="h-28 w-full" />
+                  ))}
+                </div>
+              ) : data && data.items.length ? (
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+                  {data.items.map((property) => (
+                    <PropertyCard key={property.id} property={property} compact />
+                  ))}
+                </div>
+              ) : (
+                <EmptyState
+                  title="No spaces match this map search"
+                  description="Adjust the filters or ask our team to look for you. We never place invented listings on the map."
+                  icon={<SearchX className="h-6 w-6" aria-hidden="true" />}
+                  action={
+                    <Button
+                      variant="outline"
+                      onClick={() => {
+                        setCategory("");
+                        setTownId("");
+                        setMaxRent("");
+                        setVerified("any");
+                        setQ("");
+                      }}
+                    >
+                      Clear filters
+                    </Button>
+                  }
+                />
+              )}
+            </>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
